@@ -12,9 +12,6 @@ export function OperatorField({
   value,
   onChange,
 }: OperatorFieldProps) {
-  // Use example as placeholder
-  const placeholder = operator.example
-
   return (
     <div className={`${styles.field} ${value ? styles.hasValue : ''}`}>
       <span className={styles.label}>{operator.name}</span>
@@ -23,7 +20,6 @@ export function OperatorField({
         className={styles.input}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
         aria-label={operator.name}
         aria-describedby={`tooltip-${operator.id}`}
       />

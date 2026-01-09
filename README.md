@@ -13,7 +13,7 @@ Ulike plattformer bruker ulik søkesyntaks. Søkesnirk hjelper deg å:
 ## Funksjoner
 
 - Bygg søkestrenger med plattformspesifikke operatorer
-- Støtte for flere plattformer: Google/Google Dorks, GitHub, Scholar, PubMed, Nasjonalbiblioteket, Wayback Machine, Shodan
+- Støtte for flere plattformer og query languages
 - Kopier ferdig søkestreng til utklippstavlen
 - Tooltips med forklaring på hver operator
 - Responsivt design
@@ -33,15 +33,18 @@ npm run dev
 3. Se søkestrengen bygges i sanntid
 4. Kopier søkestrengen og lim inn i valgt plattform
 
-## Plattformer
+## Plattformer og Query Languages
 
-| Kategori    | Plattformer                          |
-| ----------- | ------------------------------------ |
-| Søkemotorer | Google/Google Dorks                  |
-| Kode        | GitHub                               |
-| Akademisk   | Google Scholar, PubMed               |
-| Arkiver     | Nasjonalbiblioteket, Wayback Machine |
-| Sikkerhet   | Shodan                               |
+| Query Language | Plattformer                          |
+| -------------- | ------------------------------------ |
+| Boolean        | PubMed                               |
+| CQL            | Confluence                           |
+| Google Dorks   | Google, Google Scholar               |
+| JQL            | Jira                                 |
+| KQL            | Azure Monitor                        |
+| Lucene         | Nasjonalbiblioteket, GitHub          |
+| Shodan         | Shodan                               |
+| URL-basert     | Wayback Machine                      |
 
 ## Teknologi
 

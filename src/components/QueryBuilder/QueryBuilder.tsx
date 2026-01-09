@@ -1,19 +1,22 @@
 import { useState, useMemo } from 'react'
 import type { Platform, OperatorCategory } from '@/types'
 import { getOperatorsByPlatform } from '@/data/operators'
+import { getPlatform } from '@/data/platforms'
+import { sanitizeQueryInput, sanitizeSearchQuery } from '@/utils/sanitize'
 import { CopyButton } from '@/components/ui'
 import { OperatorField } from './OperatorField'
 import { QueryPreview } from './QueryPreview'
+import { ServiceIndicator } from './ServiceIndicator'
 import styles from './QueryBuilder.module.css'
 
 const CATEGORY_LABELS: Record<OperatorCategory, string> = {
-  basic: 'Grunnleggende',
-  site: 'Nettsted',
-  file: 'Filer',
-  date: 'Dato',
-  filter: 'Filter',
-  advanced: 'Avansert',
-  security: 'Sikkerhet',
+  basic: 'Søkeord og kombinasjoner',
+  site: 'Avgrens til nettsted',
+  file: 'Finn filer',
+  date: 'Tidsperiode',
+  filter: 'Filtrer resultater',
+  advanced: 'Avanserte teknikker',
+  security: 'Sikkerhetsanalyse',
 }
 
 const CATEGORY_ORDER: OperatorCategory[] = [
@@ -33,6 +36,7 @@ interface QueryBuilderProps {
 export function QueryBuilder({ platform }: QueryBuilderProps) {
   const [operatorValues, setOperatorValues] = useState<Record<string, string>>({})
   const [freeText, setFreeText] = useState('')
+  const platformConfig = getPlatform(platform)
 
   // Get operators grouped by category
   const operatorsByCategory = useMemo(() => {
@@ -55,10 +59,14 @@ export function QueryBuilder({ platform }: QueryBuilderProps) {
   const queryString = useMemo(() => {
     const parts: string[] = []
 
-    // Add operator values
+    // Add operator values (sanitized)
     for (const op of allOperators) {
-      const value = operatorValues[op.id]?.trim()
-      if (value) {
+      const rawValue = operatorValues[op.id]?.trim()
+      if (rawValue) {
+        // Sanitize each input value
+        const value = sanitizeQueryInput(rawValue)
+        if (!value) continue
+
         if (op.syntax.includes(':')) {
           // Operator with value (site:, filetype:, etc.)
           const prefix = op.syntax.split(':')[0]
@@ -84,12 +92,14 @@ export function QueryBuilder({ platform }: QueryBuilderProps) {
       }
     }
 
-    // Add free text at the end
-    if (freeText.trim()) {
-      parts.push(freeText.trim())
+    // Add free text at the end (sanitized)
+    const sanitizedFreeText = sanitizeQueryInput(freeText)
+    if (sanitizedFreeText) {
+      parts.push(sanitizedFreeText)
     }
 
-    return parts.join(' ')
+    // Final sanitization of the complete query
+    return sanitizeSearchQuery(parts.join(' '))
   }, [allOperators, operatorValues, freeText])
 
   const updateOperatorValue = (operatorId: string, value: string) => {
@@ -103,6 +113,9 @@ export function QueryBuilder({ platform }: QueryBuilderProps) {
 
   return (
     <div className={styles.builder}>
+      {/* Service indicator */}
+      {platformConfig && <ServiceIndicator platform={platformConfig} />}
+
       {/* Query preview and actions - visible when there's content */}
       {queryString && (
         <div className={styles.previewSection}>

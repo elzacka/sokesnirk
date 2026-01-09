@@ -4,22 +4,24 @@
 
 .input {
   width: 100%;
-  padding: 10px 12px;
+  min-height: 44px;
+  padding: 11px 13px;
   font-size: var(--text-sm);
   color: var(--color-text-primary);
   background: var(--color-bg-secondary);
   border: 1px solid transparent;
   border-radius: var(--radius-md);
-  transition: all var(--transition-fast);
+  transition: all var(--transition-base);
 }
 
 .input::placeholder {
-  color: var(--color-text-muted);
-  opacity: 0.6;
+  color: var(--color-text-placeholder);
+  opacity: 1;
 }
 
-.input:hover {
+.input:hover:not(:focus) {
   background: var(--color-bg-tertiary);
+  border-color: rgba(26, 115, 232, 0.2);
 }
 
 .input:focus {
@@ -29,22 +31,39 @@
   box-shadow: 0 0 0 3px var(--color-accent-glow);
 }
 
+.input:focus::placeholder {
+  opacity: 0.5;
+}
+
 .field.hasValue .input {
   background: var(--color-bg-primary);
   border-color: var(--color-accent);
+  box-shadow: 0 0 0 1px var(--color-accent-glow);
 }
 
-/* Label */
+.field.hasValue .input:hover {
+  box-shadow: 0 0 0 2px var(--color-accent-glow);
+}
+
+/* Label - refined positioning */
 .label {
   position: absolute;
-  top: -7px;
+  top: -8px;
   left: 10px;
-  padding: 0 4px;
+  padding: 0 5px;
   font-size: 0.6875rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--color-text-muted);
   background: var(--color-bg-primary);
-  transition: color var(--transition-fast);
+  letter-spacing: 0.01em;
+  transition: color var(--transition-base);
+  pointer-events: none;
+  user-select: none;
+  z-index: 2;
+  white-space: nowrap;
+  max-width: calc(100% - 30px);
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .field:focus-within .label,
@@ -52,70 +71,113 @@
   color: var(--color-accent);
 }
 
-/* Tooltip */
+/* Tooltip - positioned below field */
 .tooltip {
   position: absolute;
-  bottom: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 10px 14px;
-  max-width: 320px;
-  min-width: 200px;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  padding: 12px 16px;
   font-size: var(--text-xs);
-  line-height: 1.5;
+  line-height: var(--leading-relaxed);
   color: var(--color-text-primary);
   background: var(--color-bg-elevated);
-  border: var(--border-subtle);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
+  border: var(--border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
   white-space: normal;
   text-align: left;
-  z-index: 100;
+  z-index: var(--z-tooltip);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.15s ease, visibility 0.15s ease;
+  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              visibility 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
+  max-width: min(320px, calc(100vw - 2rem));
 }
 
 .tooltipDescription {
-  margin: 0 0 6px 0;
+  margin: 0 0 8px 0;
   color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
 }
 
 .tooltipExample {
   margin: 0;
-  padding-top: 6px;
-  border-top: 1px solid var(--color-border);
+  padding-top: 8px;
+  border-top: 1px solid var(--border-subtle);
   color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
 }
 
 .tooltipExample code {
-  padding: 2px 5px;
+  padding: 3px 6px;
   font-family: var(--font-mono);
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   color: var(--color-accent);
-  background: var(--color-bg-secondary);
+  background: var(--color-accent-glow);
   border-radius: var(--radius-sm);
+  font-weight: 500;
+  word-break: break-word;
 }
 
+/* Arrow pointing up */
 .tooltip::after {
   content: '';
   position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 6px solid transparent;
-  border-top-color: var(--color-bg-elevated);
+  bottom: 100%;
+  left: 20px;
+  border: 7px solid transparent;
+  border-bottom-color: var(--color-bg-elevated);
+  filter: drop-shadow(0 -1px 1px rgba(0, 0, 0, 0.04));
 }
 
 .field:hover .tooltip {
   opacity: 1;
   visibility: visible;
-  transition-delay: 0.5s;
+  transition-delay: 500ms;
 }
 
 .field:focus-within .tooltip {
   opacity: 0;
   visibility: hidden;
   transition-delay: 0s;
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .input {
+    font-size: 16px; /* Prevents iOS zoom */
+    min-height: 48px;
+    padding: 12px 14px;
+  }
+
+  .label {
+    font-size: 0.625rem;
+  }
+
+  .tooltip {
+    position: fixed;
+    left: var(--space-md);
+    right: var(--space-md);
+    top: auto;
+    bottom: var(--space-lg);
+    max-width: none;
+  }
+
+  .tooltip::after {
+    display: none;
+  }
+}
+
+/* Touch devices: disable hover tooltips */
+@media (hover: none) {
+  .field:hover .tooltip {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .input {
+    min-height: 48px;
+  }
 }

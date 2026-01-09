@@ -35,14 +35,17 @@ src/
 └── types/               # TypeScript-typer
 ```
 
-## Plattformer
+## Plattformer og Query Languages
 
-Støtter operatorer for:
-- Google (søkemotor)
-- GitHub (kode)
-- Google Scholar, PubMed (akademisk)
-- Nasjonalbiblioteket, Wayback Machine (arkiver)
-- Shodan (sikkerhet)
+Organisert etter query language:
+- Boolean: PubMed
+- CQL: Confluence
+- Google Dorks: Google, Google Scholar
+- JQL: Jira
+- KQL: Azure Monitor
+- Lucene: Nasjonalbiblioteket, GitHub
+- Shodan: Shodan
+- URL-basert: Wayback Machine
 
 ## Konvensjoner
 

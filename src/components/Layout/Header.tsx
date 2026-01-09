@@ -14,7 +14,7 @@ export function Header({ platform, onPlatformChange }: HeaderProps) {
       <div className={styles.container}>
         <div className={styles.brand}>
           <div className={styles.logo}>
-            <SearchIcon size={20} />
+            <SearchIcon size={14} />
           </div>
           <span className={styles.appName}>Søkesnirk</span>
         </div>

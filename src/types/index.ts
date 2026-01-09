@@ -6,8 +6,21 @@ export type Platform =
   | 'pubmed'
   | 'nb'
   | 'archive'
+  | 'confluence'
+  | 'jira'
+  | 'azure'
 
-export type PlatformCategory = 'search' | 'code' | 'academic' | 'archive' | 'security'
+export type PlatformCategory = 'search' | 'code' | 'academic' | 'archive' | 'security' | 'productivity'
+
+export type QueryLanguage =
+  | 'google-style'
+  | 'boolean'
+  | 'lucene'
+  | 'shodan'
+  | 'cql'
+  | 'jql'
+  | 'kql'
+  | 'url-based'
 
 export type OperatorCategory =
   | 'basic'
@@ -40,6 +53,7 @@ export interface PlatformConfig {
   searchUrl: string
   placeholder: string
   category: PlatformCategory
+  queryLanguage: QueryLanguage
 }
 
 export interface Template {

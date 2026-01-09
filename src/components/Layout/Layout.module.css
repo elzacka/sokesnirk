@@ -4,27 +4,29 @@
   min-height: 100dvh;
 }
 
-/* Skip link for keyboard navigation - WCAG 2.2 */
+/* Skip link - enhanced WCAG 2.2 compliance */
 .skipLink {
   position: absolute;
   top: -100%;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1000;
-  padding: var(--space-sm) var(--space-md);
+  z-index: var(--z-modal);
+  padding: var(--space-md) var(--space-lg);
   background: var(--color-accent);
-  color: var(--color-bg-primary);
-  font-weight: 600;
+  color: white;
+  font-weight: 700;
   font-size: var(--text-sm);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   text-decoration: none;
-  transition: top var(--transition-fast);
+  box-shadow: var(--shadow-xl);
+  transition: top var(--transition-base);
+  white-space: nowrap;
 }
 
 .skipLink:focus {
-  top: var(--space-md);
-  outline: 2px solid var(--color-text-primary);
-  outline-offset: 2px;
+  top: var(--space-lg);
+  outline: 3px solid var(--color-text-primary);
+  outline-offset: 3px;
 }
 
 .main {
@@ -32,15 +34,59 @@
   width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: var(--space-lg) var(--space-md);
+  padding: var(--space-page);
+  animation: fadeIn 0.3s ease-out;
+  /* iOS safe area support */
+  padding-bottom: max(var(--space-page), env(safe-area-inset-bottom));
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .main:focus {
   outline: none;
 }
 
-@media (min-width: 640px) {
+/* Responsive padding */
+@media (min-width: 641px) {
   .main {
-    padding: var(--space-xl) var(--space-lg);
+    padding: var(--space-section) var(--space-page);
+  }
+}
+
+@media (min-width: 1024px) {
+  .main {
+    padding: var(--space-section) var(--space-xl);
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .main {
+    padding: var(--space-md);
+    padding-bottom: max(var(--space-md), calc(env(safe-area-inset-bottom) + var(--space-sm)));
+  }
+}
+
+/* Landscape mobile - reduce vertical padding */
+@media (max-height: 600px) and (orientation: landscape) {
+  .main {
+    padding-top: var(--space-md);
+    padding-bottom: var(--space-md);
+  }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .main {
+    animation: none;
   }
 }

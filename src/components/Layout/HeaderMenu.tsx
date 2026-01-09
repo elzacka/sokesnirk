@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
-import type { Platform, PlatformCategory } from '@/types'
-import { PLATFORMS, PLATFORM_CATEGORY_LABELS, getPlatform } from '@/data/platforms'
+import type { Platform, QueryLanguage } from '@/types'
+import { PLATFORMS, QUERY_LANGUAGE_LABELS, getPlatform } from '@/data/platforms'
 import { MenuIcon, InfoIcon, XIcon, ChevronRightIcon } from '@/components/Icons'
 import styles from './HeaderMenu.module.css'
 
@@ -9,7 +9,16 @@ interface HeaderMenuProps {
   onPlatformChange: (platform: Platform) => void
 }
 
-const CATEGORY_ORDER: PlatformCategory[] = ['search', 'code', 'academic', 'archive', 'security']
+const QUERY_LANGUAGE_ORDER: QueryLanguage[] = [
+  'boolean',
+  'cql',
+  'google-style',
+  'jql',
+  'kql',
+  'lucene',
+  'shodan',
+  'url-based',
+]
 
 export function HeaderMenu({ platform, onPlatformChange }: HeaderMenuProps) {
   const [isOpen, setIsOpen] = useState(false)
@@ -43,11 +52,11 @@ export function HeaderMenu({ platform, onPlatformChange }: HeaderMenuProps) {
     setActivePanel('main')
   }
 
-  // Group platforms by category
-  const platformsByCategory = CATEGORY_ORDER.map((category) => ({
-    category,
-    label: PLATFORM_CATEGORY_LABELS[category],
-    platforms: PLATFORMS.filter((p) => p.category === category),
+  // Group platforms by query language
+  const platformsByQueryLanguage = QUERY_LANGUAGE_ORDER.map((queryLanguage) => ({
+    queryLanguage,
+    label: QUERY_LANGUAGE_LABELS[queryLanguage],
+    platforms: PLATFORMS.filter((p) => p.queryLanguage === queryLanguage),
   })).filter((group) => group.platforms.length > 0)
 
   return (
@@ -76,7 +85,7 @@ export function HeaderMenu({ platform, onPlatformChange }: HeaderMenuProps) {
                   {currentPlatform?.icon}
                 </span>
                 <span className={styles.menuLabel}>
-                  <span className={styles.menuTitle}>Velg type tjeneste</span>
+                  <span className={styles.menuTitle}>Velg tjeneste</span>
                   <span className={styles.menuValue}>{currentPlatform?.name}</span>
                 </span>
                 <ChevronRightIcon size={16} className={styles.chevron} />
@@ -102,8 +111,8 @@ export function HeaderMenu({ platform, onPlatformChange }: HeaderMenuProps) {
                 ← Tilbake
               </button>
               <div className={styles.platformList}>
-                {platformsByCategory.map((group) => (
-                  <div key={group.category} className={styles.categoryGroup}>
+                {platformsByQueryLanguage.map((group) => (
+                  <div key={group.queryLanguage} className={styles.categoryGroup}>
                     <div className={styles.categoryLabel}>{group.label}</div>
                     {group.platforms.map((p) => (
                       <button
@@ -117,7 +126,10 @@ export function HeaderMenu({ platform, onPlatformChange }: HeaderMenuProps) {
                         >
                           {p.icon}
                         </span>
-                        <span>{p.name}</span>
+                        <span className={styles.platformName}>{p.name}</span>
+                        <span className={styles.queryLanguageTag}>
+                          {QUERY_LANGUAGE_LABELS[p.queryLanguage]}
+                        </span>
                       </button>
                     ))}
                   </div>
@@ -136,16 +148,11 @@ export function HeaderMenu({ platform, onPlatformChange }: HeaderMenuProps) {
               </button>
               <div className={styles.infoContent}>
                 <p className={styles.infoText}>
-                  <strong>Søkesnirk</strong> hjelper deg å bygge avanserte søkestrenger
-                  for ulike tjenester.
+                  <strong>Søkesnirk</strong> hjelper deg å lage presise søk i Google,
+                  digitale arkiver, Shodan, GitHub og andre typer tjenester.
                 </p>
                 <p className={styles.infoText}>
-                  Kombiner operatorer og søkeord for å lage presise søk som finner
-                  akkurat det du leter etter.
-                </p>
-                <p className={styles.infoText}>
-                  Velg tjeneste, fyll ut feltene du trenger, og kopier
-                  søkestrengen.
+                  Velg tjeneste, fyll ut feltene du trenger, kopier søkestrengen og lim inn der du skal søke. Tips: Hold musepeker over feltet for å se veiledning.
                 </p>
               </div>
             </div>

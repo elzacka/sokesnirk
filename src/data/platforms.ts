@@ -1,4 +1,4 @@
-import type { PlatformConfig, PlatformCategory } from '@/types'
+import type { PlatformConfig, PlatformCategory, QueryLanguage } from '@/types'
 
 export const PLATFORM_CATEGORY_LABELS: Record<PlatformCategory, string> = {
   search: 'Søkemotorer',
@@ -6,41 +6,23 @@ export const PLATFORM_CATEGORY_LABELS: Record<PlatformCategory, string> = {
   academic: 'Akademisk',
   archive: 'Arkiver',
   security: 'Sikkerhet',
+  productivity: 'Produktivitet',
 }
 
+export const QUERY_LANGUAGE_LABELS: Record<QueryLanguage, string> = {
+  'google-style': 'Google Dorks',
+  boolean: 'Boolean',
+  lucene: 'Lucene',
+  shodan: 'Shodan',
+  cql: 'CQL',
+  jql: 'JQL',
+  kql: 'KQL',
+  'url-based': 'URL-basert',
+}
+
+// Sortert etter Query Language
 export const PLATFORMS: PlatformConfig[] = [
-  // Søkemotorer
-  {
-    id: 'google',
-    name: 'Google',
-    icon: 'G',
-    color: '#4285f4',
-    searchUrl: 'https://www.google.com/search?q=',
-    placeholder: 'Søk på Google...',
-    category: 'search',
-  },
-
-  // Kode
-  {
-    id: 'github',
-    name: 'GitHub',
-    icon: 'GH',
-    color: '#8b5cf6',
-    searchUrl: 'https://github.com/search?q=',
-    placeholder: 'Søk på GitHub...',
-    category: 'code',
-  },
-
-  // Akademisk
-  {
-    id: 'scholar',
-    name: 'Google Scholar',
-    icon: 'GS',
-    color: '#4285f4',
-    searchUrl: 'https://scholar.google.com/scholar?q=',
-    placeholder: 'Søk i akademisk litteratur...',
-    category: 'academic',
-  },
+  // Boolean
   {
     id: 'pubmed',
     name: 'PubMed',
@@ -49,9 +31,44 @@ export const PLATFORMS: PlatformConfig[] = [
     searchUrl: 'https://pubmed.ncbi.nlm.nih.gov/?term=',
     placeholder: 'Søk i medisinsk litteratur...',
     category: 'academic',
+    queryLanguage: 'boolean',
   },
 
-  // Arkiver
+  // CQL (Contextual Query Language)
+  {
+    id: 'confluence',
+    name: 'Confluence',
+    icon: 'C',
+    color: '#0052cc',
+    searchUrl: 'https://confluence.atlassian.com/dosearchsite.action?cql=',
+    placeholder: 'Søk i Confluence...',
+    category: 'productivity',
+    queryLanguage: 'cql',
+  },
+
+  // Google Dorks
+  {
+    id: 'google',
+    name: 'Google',
+    icon: 'G',
+    color: '#4285f4',
+    searchUrl: 'https://www.google.com/search?q=',
+    placeholder: 'Søk på Google...',
+    category: 'search',
+    queryLanguage: 'google-style',
+  },
+  {
+    id: 'scholar',
+    name: 'Google Scholar',
+    icon: 'GS',
+    color: '#4285f4',
+    searchUrl: 'https://scholar.google.com/scholar?q=',
+    placeholder: 'Søk i akademisk litteratur...',
+    category: 'academic',
+    queryLanguage: 'google-style',
+  },
+
+  // Lucene/Solr
   {
     id: 'nb',
     name: 'Nasjonalbiblioteket',
@@ -60,18 +77,44 @@ export const PLATFORMS: PlatformConfig[] = [
     searchUrl: 'https://www.nb.no/search?q=',
     placeholder: 'Søk i Nettbiblioteket...',
     category: 'archive',
+    queryLanguage: 'lucene',
   },
   {
-    id: 'archive',
-    name: 'Wayback Machine',
-    icon: 'WM',
-    color: '#5c9eff',
-    searchUrl: 'https://web.archive.org/web/*/',
-    placeholder: 'Finn arkivert nettside...',
-    category: 'archive',
+    id: 'github',
+    name: 'GitHub',
+    icon: 'GH',
+    color: '#8b5cf6',
+    searchUrl: 'https://github.com/search?q=',
+    placeholder: 'Søk på GitHub...',
+    category: 'code',
+    queryLanguage: 'lucene',
   },
 
-  // Sikkerhet
+  // JQL (Jira Query Language)
+  {
+    id: 'jira',
+    name: 'Jira',
+    icon: 'J',
+    color: '#0052cc',
+    searchUrl: 'https://jira.atlassian.com/issues/?jql=',
+    placeholder: 'Søk i Jira...',
+    category: 'productivity',
+    queryLanguage: 'jql',
+  },
+
+  // KQL (Kusto Query Language)
+  {
+    id: 'azure',
+    name: 'Azure Monitor',
+    icon: 'AZ',
+    color: '#0078d4',
+    searchUrl: 'https://portal.azure.com/#blade/Microsoft_Azure_Monitoring_Logs/LogsBlade',
+    placeholder: 'Søk i Azure logs...',
+    category: 'security',
+    queryLanguage: 'kql',
+  },
+
+  // Shodan
   {
     id: 'shodan',
     name: 'Shodan',
@@ -80,6 +123,19 @@ export const PLATFORMS: PlatformConfig[] = [
     searchUrl: 'https://www.shodan.io/search?query=',
     placeholder: 'Søk på Shodan...',
     category: 'security',
+    queryLanguage: 'shodan',
+  },
+
+  // URL-basert
+  {
+    id: 'archive',
+    name: 'Wayback Machine',
+    icon: 'WM',
+    color: '#5c9eff',
+    searchUrl: 'https://web.archive.org/web/*/',
+    placeholder: 'Finn arkivert nettside...',
+    category: 'archive',
+    queryLanguage: 'url-based',
   },
 ]
 
@@ -89,4 +145,8 @@ export function getPlatform(id: string): PlatformConfig | undefined {
 
 export function getPlatformsByCategory(category: PlatformCategory): PlatformConfig[] {
   return PLATFORMS.filter((p) => p.category === category)
+}
+
+export function getPlatformsByQueryLanguage(queryLanguage: QueryLanguage): PlatformConfig[] {
+  return PLATFORMS.filter((p) => p.queryLanguage === queryLanguage)
 }

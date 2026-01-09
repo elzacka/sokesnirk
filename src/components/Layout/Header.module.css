@@ -1,10 +1,37 @@
 .header {
   position: sticky;
   top: 0;
-  z-index: 100;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px);
+  z-index: var(--z-sticky);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
   border-bottom: var(--border-subtle);
+  box-shadow: var(--shadow-xs);
+  transition: box-shadow var(--transition-base);
+  /* iOS safe area support */
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-accent) 50%,
+    transparent
+  );
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.header:focus-within::after {
+  opacity: 0.3;
 }
 
 .container {
@@ -12,36 +39,123 @@
   align-items: center;
   justify-content: space-between;
   max-width: var(--max-width);
-  height: var(--header-height);
+  min-height: var(--header-height);
   margin: 0 auto;
-  padding: 0 var(--space-md);
+  padding: 0 var(--space-page);
+  gap: var(--space-md);
 }
 
 .brand {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
+  cursor: pointer;
+  transition: transform var(--transition-base);
+  flex: 1;
+  min-width: 0;
+}
+
+.brand:hover {
+  transform: translateY(-1px);
+}
+
+.brand:active {
+  transform: translateY(0);
 }
 
 .logo {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  background: var(--color-accent);
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-hover) 100%);
   color: white;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+}
+
+.brand:hover .logo {
+  box-shadow: var(--shadow-md);
+  transform: rotate(-5deg);
+}
+
+.brand:active .logo {
+  transform: rotate(-2deg) scale(0.96);
 }
 
 .appName {
-  font-size: var(--text-lg);
-  font-weight: 600;
+  font-size: 1.75rem;
+  font-weight: 700;
   color: var(--color-text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  transition: color var(--transition-base);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-@media (max-width: 480px) {
+.brand:hover .appName {
+  color: var(--color-accent);
+}
+
+/* Tablet adjustments */
+@media (max-width: 768px) {
   .appName {
-    font-size: var(--text-base);
+    font-size: 1.5rem;
+  }
+
+  .logo {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .container {
+    padding: 0 var(--space-md);
+    gap: var(--space-sm);
+  }
+
+  .appName {
+    font-size: 1.375rem;
+  }
+
+  .logo {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 400px) {
+  .appName {
+    font-size: 1.25rem;
+  }
+}
+
+/* Safari-specific fix for backdrop-filter */
+@supports not (backdrop-filter: blur(16px)) {
+  .header {
+    background: rgba(255, 255, 255, 0.98);
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .header {
+    background: rgba(26, 26, 26, 0.92);
+  }
+  
+  @supports not (backdrop-filter: blur(16px)) {
+    .header {
+      background: rgba(26, 26, 26, 0.98);
+    }
   }
 }

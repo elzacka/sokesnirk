@@ -1,19 +1,59 @@
 .button {
-  transition: all var(--transition-fast);
+  transition: all var(--transition-base);
+  position: relative;
 }
 
 .copied {
-  animation: pulse 0.3s ease;
+  animation: copySuccess 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-@keyframes pulse {
+@keyframes copySuccess {
   0% {
     transform: scale(1);
   }
+  25% {
+    transform: scale(0.95);
+  }
   50% {
-    transform: scale(1.05);
+    transform: scale(1.06);
+  }
+  75% {
+    transform: scale(0.98);
   }
   100% {
     transform: scale(1);
+  }
+}
+
+/* Success indicator */
+.copied::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  background: var(--color-success);
+  opacity: 0;
+  animation: successRing 0.6s ease-out;
+}
+
+@keyframes successRing {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* Reduce motion support */
+@media (prefers-reduced-motion: reduce) {
+  .copied {
+    animation: none;
+  }
+  
+  .copied::after {
+    animation: none;
   }
 }
