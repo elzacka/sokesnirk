@@ -68,12 +68,35 @@ export const OperatorField = memo(function OperatorField({
         aria-label={operator.name}
         aria-describedby={`tooltip-${operator.id}`}
       />
+      {/* Backdrop for mobile tooltip */}
+      {isTouchDevice && showTooltip && (
+        <div
+          className={styles.backdrop}
+          onClick={() => setShowTooltip(false)}
+          aria-hidden="true"
+        />
+      )}
       <div
         className={styles.tooltip}
         id={`tooltip-${operator.id}`}
         role="tooltip"
         aria-hidden={!showTooltip && isTouchDevice}
       >
+        <header className={styles.tooltipHeader}>
+          <span className={styles.tooltipTitle}>{operator.name}</span>
+          {isTouchDevice && (
+            <button
+              type="button"
+              className={styles.tooltipClose}
+              onClick={() => setShowTooltip(false)}
+              aria-label="Lukk"
+            >
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+              </svg>
+            </button>
+          )}
+        </header>
         <p className={styles.tooltipDescription}>{operator.description}</p>
         <p className={styles.tooltipExample}>
           Eks: <code>{operator.inputExample}</code>

@@ -27,7 +27,7 @@ src/
 │   ├── QueryBuilder/    # Hovedfunksjonalitet
 │   └── ui/              # Gjenbrukbare komponenter
 ├── data/
-│   ├── operators.ts     # Operatorer per plattform
+│   ├── operators/       # Operatorer per plattform (én fil per plattform)
 │   └── platforms.ts     # Plattformkonfigurasjon
 ├── hooks/               # Custom hooks
 ├── pages/               # Sidekomponenter
@@ -52,4 +52,6 @@ Organisert etter query language:
 - Norsk UI-tekst
 - Ingen eksterne ikonbibliotek (egne SVG-ikoner i Icons.tsx)
 - Floating label-mønster i skjemafelt
-- Tooltip med hover-delay på operatorfelt
+- Tooltip med hover-delay på desktop, tap-to-show på mobil
+- WCAG 2.2 AA: 44px touch targets, 4.5:1 kontrast
+- iOS safe area support for notch/home indicator

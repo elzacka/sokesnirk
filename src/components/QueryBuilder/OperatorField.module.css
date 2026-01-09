@@ -4,8 +4,8 @@
 
 .input {
   width: 100%;
-  min-height: 44px;
-  padding: 11px 13px;
+  min-height: 40px;
+  padding: 9px 11px;
   font-size: var(--text-sm);
   color: var(--color-text-primary);
   background: var(--color-bg-secondary);
@@ -21,7 +21,7 @@
 
 .input:hover:not(:focus) {
   background: var(--color-bg-tertiary);
-  border-color: rgba(26, 115, 232, 0.2);
+  border-color: rgba(246, 244, 240, 0.1);
 }
 
 .input:focus {
@@ -120,10 +120,53 @@
   z-index: var(--z-tooltip);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-              visibility 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
   max-width: min(320px, calc(100vw - 2rem));
+}
+
+/* Tooltip header - only visible on mobile */
+.tooltipHeader {
+  display: none;
+}
+
+.tooltipTitle {
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.tooltipClose {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  margin: -8px -8px -8px 0;
+}
+
+.tooltipClose:hover,
+.tooltipClose:active {
+  color: var(--color-text-primary);
+  background: var(--color-accent-glow);
+}
+
+.tooltipClose svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Backdrop for mobile tooltip */
+.backdrop {
+  display: none;
 }
 
 .tooltipDescription {
@@ -181,12 +224,41 @@
 @media (max-width: 640px) {
   .input {
     font-size: 16px; /* Prevents iOS zoom */
-    min-height: 48px;
-    padding: 12px 14px;
+    min-height: 44px;
+    padding: 10px 12px;
   }
 
   .label {
     font-size: 0.625rem;
+  }
+
+  /* Mobile backdrop */
+  .backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: calc(var(--z-tooltip) - 1);
+    animation: fadeIn 0.2s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* Mobile tooltip header */
+  .tooltipHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .tooltipTitle {
+    font-size: var(--text-base);
   }
 
   .tooltip {
@@ -196,10 +268,32 @@
     top: auto;
     bottom: var(--space-lg);
     max-width: none;
+    transform: translateY(calc(100% + var(--space-lg)));
+    border-radius: var(--radius-xl);
+    padding: 16px 20px;
+    /* iOS safe area support */
+    padding-bottom: max(20px, env(safe-area-inset-bottom));
+  }
+
+  .field.showTooltip .tooltip {
+    transform: translateY(0);
   }
 
   .tooltip::after {
     display: none;
+  }
+
+  .tooltipDescription {
+    font-size: var(--text-sm);
+  }
+
+  .tooltipExample {
+    font-size: var(--text-sm);
+  }
+
+  .tooltipExample code {
+    font-size: var(--text-sm);
+    padding: 4px 8px;
   }
 }
 
@@ -220,7 +314,7 @@
   }
 
   .input {
-    min-height: 48px;
+    min-height: 44px;
   }
 
   /* Make info button more prominent on touch */

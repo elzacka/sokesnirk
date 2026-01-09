@@ -15,8 +15,10 @@ Ulike plattformer bruker ulik søkesyntaks. Søkesnirk hjelper deg å:
 - Bygg søkestrenger med plattformspesifikke operatorer
 - Støtte for flere plattformer og query languages
 - Kopier ferdig søkestreng til utklippstavlen
-- Tooltips med forklaring på hver operator
-- Responsivt design
+- Tooltips med forklaring og eksempler på hver operator
+- Responsivt design med optimalisert mobilopplevelse
+- Touch-vennlige tooltips med slide-up modal på mobil
+- WCAG 2.2 AA-kompatibelt (44px touch targets, god kontrast)
 - Fungerer offline (PWA)
 
 ## Installasjon

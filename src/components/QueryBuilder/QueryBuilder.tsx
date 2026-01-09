@@ -1,6 +1,5 @@
-import { useState, useMemo } from 'react'
-import type { Platform, OperatorCategory } from '@/types'
-import { getPlatform, QUERY_LANGUAGE_LABELS } from '@/data/platforms'
+import { useState, useMemo, useEffect } from 'react'
+import type { Platform, OperatorCategory, Operator } from '@/types'
 import { getOperatorsByPlatform } from '@/data/operators/index'
 import { sanitizeQueryInput, sanitizeSearchQuery } from '@/utils/sanitize'
 import { CopyButton } from '@/components/ui'
@@ -8,14 +7,24 @@ import { OperatorField } from './OperatorField'
 import { QueryPreview } from './QueryPreview'
 import styles from './QueryBuilder.module.css'
 
-const CATEGORY_LABELS: Record<OperatorCategory, string> = {
-  basic: 'Søkeord og kombinasjoner',
-  site: 'Avgrens til nettsted',
-  file: 'Finn filer',
-  date: 'Tidsperiode',
-  filter: 'Filtrer resultater',
-  advanced: 'Avanserte teknikker',
-  security: 'Sikkerhetsanalyse',
+// Check if device is touch-based
+function useIsTouchDevice() {
+  const [isTouch, setIsTouch] = useState(false)
+  useEffect(() => {
+    setIsTouch(window.matchMedia('(hover: none)').matches)
+  }, [])
+  return isTouch
+}
+
+const FREE_TEXT_OPERATOR: Operator = {
+  id: 'free-text',
+  name: 'Søkeord',
+  syntax: 'ord',
+  description: 'Vanlige søkeord uten spesielle operatorer. Legges til på slutten av søket',
+  inputExample: 'klimaendringer',
+  category: 'basic',
+  platforms: [],
+  level: 'beginner',
 }
 
 const CATEGORY_ORDER: OperatorCategory[] = [
@@ -35,8 +44,7 @@ interface QueryBuilderProps {
 export function QueryBuilder({ platform }: QueryBuilderProps) {
   const [operatorValues, setOperatorValues] = useState<Record<string, string>>({})
   const [freeText, setFreeText] = useState('')
-
-  const platformConfig = getPlatform(platform)
+  const isTouchDevice = useIsTouchDevice()
 
   // Get operators grouped by category
   const operatorsByCategory = useMemo(() => {
@@ -113,17 +121,8 @@ export function QueryBuilder({ platform }: QueryBuilderProps) {
 
   return (
     <div className={styles.builder}>
-      {/* Compact query output bar */}
+      {/* Query output bar */}
       <div className={styles.queryBar}>
-        {platformConfig && (
-          <span
-            className={styles.serviceBadge}
-            style={{ background: platformConfig.color }}
-            title={`${platformConfig.name} (${QUERY_LANGUAGE_LABELS[platformConfig.queryLanguage]})`}
-          >
-            {platformConfig.icon}
-          </span>
-        )}
         <div className={styles.queryOutput}>
           {queryString ? (
             <QueryPreview query={queryString} />
@@ -145,42 +144,31 @@ export function QueryBuilder({ platform }: QueryBuilderProps) {
         </div>
       </div>
 
-      {/* Section intro with hint */}
-      <p className={styles.sectionHint}>Hold over feltene for veiledning</p>
+      {/* Section intro with hint - different for touch vs hover */}
+      <p className={styles.sectionHint}>
+        {isTouchDevice ? 'Trykk ⓘ for veiledning' : 'Hold over feltene for veiledning'}
+      </p>
 
-      {/* Operators grouped by category */}
-      <div className={styles.categorySections}>
-        {CATEGORY_ORDER.map((category) => {
+      {/* All operators in a unified flow */}
+      <div className={styles.operatorGrid}>
+        {/* Free text field first */}
+        <OperatorField
+          operator={FREE_TEXT_OPERATOR}
+          value={freeText}
+          onChange={setFreeText}
+        />
+        {/* All operators from all categories */}
+        {CATEGORY_ORDER.flatMap((category) => {
           const operators = operatorsByCategory.get(category)
-          if (!operators?.length) return null
-
-          return (
-            <section key={category} className={styles.categorySection}>
-              <h3 className={styles.categoryTitle}>{CATEGORY_LABELS[category]}</h3>
-              <div className={styles.operatorGrid}>
-                {category === 'basic' && (
-                  <div className={`${styles.field} ${freeText ? styles.hasValue : ''}`}>
-                    <span className={styles.fieldLabel}>Søkeord</span>
-                    <input
-                      type="text"
-                      className={styles.fieldInput}
-                      value={freeText}
-                      onChange={(e) => setFreeText(e.target.value)}
-                      aria-label="Søkeord"
-                    />
-                  </div>
-                )}
-                {operators.map((operator) => (
-                  <OperatorField
-                    key={operator.id}
-                    operator={operator}
-                    value={operatorValues[operator.id] || ''}
-                    onChange={(value) => updateOperatorValue(operator.id, value)}
-                  />
-                ))}
-              </div>
-            </section>
-          )
+          if (!operators?.length) return []
+          return operators.map((operator) => (
+            <OperatorField
+              key={operator.id}
+              operator={operator}
+              value={operatorValues[operator.id] || ''}
+              onChange={(value) => updateOperatorValue(operator.id, value)}
+            />
+          ))
         })}
       </div>
     </div>
