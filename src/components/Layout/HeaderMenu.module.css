@@ -155,7 +155,7 @@
   padding: 2px 4px;
   border-radius: var(--radius-sm);
   background: var(--platform-color, var(--color-accent));
-  color: white;
+  color: #222222;
   font-size: 0.625rem;
   font-weight: 700;
   flex-shrink: 0;

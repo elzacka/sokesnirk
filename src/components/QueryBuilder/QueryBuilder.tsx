@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react'
 import type { Platform, OperatorCategory } from '@/types'
-import { getOperatorsByPlatform } from '@/data/operators'
+import { getPlatform, QUERY_LANGUAGE_LABELS } from '@/data/platforms'
+import { getOperatorsByPlatform } from '@/data/operators/index'
 import { sanitizeQueryInput, sanitizeSearchQuery } from '@/utils/sanitize'
 import { CopyButton } from '@/components/ui'
 import { OperatorField } from './OperatorField'
@@ -34,6 +35,8 @@ interface QueryBuilderProps {
 export function QueryBuilder({ platform }: QueryBuilderProps) {
   const [operatorValues, setOperatorValues] = useState<Record<string, string>>({})
   const [freeText, setFreeText] = useState('')
+
+  const platformConfig = getPlatform(platform)
 
   // Get operators grouped by category
   const operatorsByCategory = useMemo(() => {
@@ -110,18 +113,40 @@ export function QueryBuilder({ platform }: QueryBuilderProps) {
 
   return (
     <div className={styles.builder}>
-      {/* Query preview and actions - visible when there's content */}
-      {queryString && (
-        <div className={styles.previewSection}>
-          <QueryPreview query={queryString} />
-          <div className={styles.previewActions}>
-            <button className={styles.clearButton} onClick={clearAll}>
+      {/* Compact query output bar */}
+      <div className={styles.queryBar}>
+        {platformConfig && (
+          <span
+            className={styles.serviceBadge}
+            style={{ background: platformConfig.color }}
+            title={`${platformConfig.name} (${QUERY_LANGUAGE_LABELS[platformConfig.queryLanguage]})`}
+          >
+            {platformConfig.icon}
+          </span>
+        )}
+        <div className={styles.queryOutput}>
+          {queryString ? (
+            <QueryPreview query={queryString} />
+          ) : (
+            <span className={styles.queryPlaceholder}>Søkestrengen vises her</span>
+          )}
+        </div>
+        <div className={styles.queryActions}>
+          {queryString && (
+            <button
+              className={styles.clearButton}
+              onClick={clearAll}
+              aria-label="Tøm alle felt"
+            >
               Tøm
             </button>
-            <CopyButton text={queryString} size="sm" />
-          </div>
+          )}
+          <CopyButton text={queryString} size="sm" disabled={!queryString} />
         </div>
-      )}
+      </div>
+
+      {/* Section intro with hint */}
+      <p className={styles.sectionHint}>Hold over feltene for veiledning</p>
 
       {/* Operators grouped by category */}
       <div className={styles.categorySections}>

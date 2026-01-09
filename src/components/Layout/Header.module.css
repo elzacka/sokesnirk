@@ -2,7 +2,7 @@
   position: sticky;
   top: 0;
   z-index: var(--z-sticky);
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(34, 34, 34, 0.95);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
   border-bottom: var(--border-subtle);
@@ -49,8 +49,8 @@
   width: 24px;
   height: 24px;
   min-width: 24px;
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-hover) 100%);
-  color: white;
+  background: var(--color-text-primary);
+  color: var(--color-bg-primary);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
   transition: all var(--transition-base);
@@ -66,10 +66,11 @@
 }
 
 .appName {
+  font-family: var(--font-brand);
   font-size: 1.75rem;
-  font-weight: 700;
+  font-weight: 400;
   color: var(--color-text-primary);
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   line-height: 1;
   transition: color var(--transition-base);
   white-space: nowrap;
@@ -79,59 +80,6 @@
 
 .brand:hover .appName {
   color: var(--color-accent);
-}
-
-/* Service bar - attached to header */
-.serviceBar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: var(--space-xs) var(--space-page);
-  border-top: 1px solid var(--color-border-subtle);
-  background: var(--color-bg-secondary);
-}
-
-.serviceInfo {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.serviceLabel {
-  font-size: 0.6875rem;
-  color: var(--color-text-muted);
-}
-
-.serviceBadge {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 18px;
-  height: 18px;
-  font-size: 0.5rem;
-  font-weight: 700;
-  color: white;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.serviceName {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--color-text-primary);
-}
-
-.serviceLanguage {
-  font-size: 0.625rem;
-  color: var(--color-text-muted);
-}
-
-.serviceHint {
-  font-size: 0.625rem;
-  color: var(--color-text-muted);
-  opacity: 0.6;
 }
 
 /* Tablet adjustments */
@@ -144,10 +92,6 @@
     width: 22px;
     height: 22px;
     min-width: 22px;
-  }
-
-  .serviceHint {
-    display: none;
   }
 }
 
@@ -167,15 +111,6 @@
     height: 20px;
     min-width: 20px;
   }
-
-  .serviceBar {
-    padding: var(--space-xs) var(--space-md);
-  }
-
-  .serviceLabel,
-  .serviceLanguage {
-    display: none;
-  }
 }
 
 /* Very small screens */
@@ -188,19 +123,6 @@
 /* Safari-specific fix for backdrop-filter */
 @supports not (backdrop-filter: blur(16px)) {
   .header {
-    background: rgba(255, 255, 255, 0.98);
-  }
-}
-
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .header {
-    background: rgba(26, 26, 26, 0.92);
-  }
-  
-  @supports not (backdrop-filter: blur(16px)) {
-    .header {
-      background: rgba(26, 26, 26, 0.98);
-    }
+    background: rgba(34, 34, 34, 0.98);
   }
 }

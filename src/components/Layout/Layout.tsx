@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react'
 import type { Platform } from '@/types'
-import { getPlatform } from '@/data/platforms'
 import { Header } from './Header'
 import styles from './Layout.module.css'
 
@@ -11,18 +10,12 @@ interface LayoutProps {
 }
 
 export function Layout({ children, platform, onPlatformChange }: LayoutProps) {
-  const platformConfig = getPlatform(platform)
-
   return (
     <div className={styles.layout}>
       <a href="#main-content" className={styles.skipLink}>
         Hopp til hovedinnhold
       </a>
-      <Header
-        platform={platform}
-        platformConfig={platformConfig}
-        onPlatformChange={onPlatformChange}
-      />
+      <Header platform={platform} onPlatformChange={onPlatformChange} />
       <main id="main-content" className={styles.main} tabIndex={-1}>
         {children}
       </main>

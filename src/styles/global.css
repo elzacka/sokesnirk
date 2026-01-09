@@ -1,38 +1,36 @@
-/* Søkesnirk - Enhanced design system with responsive improvements */
+/* Søkesnirk - Dark theme design system */
+
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap');
 
 :root {
-  /* Light backgrounds - refined hierarchy */
-  --color-bg-primary: #ffffff;
-  --color-bg-secondary: #f8f9fa;
-  --color-bg-tertiary: #f1f3f4;
-  --color-bg-elevated: #ffffff;
-  --color-bg-overlay: rgba(26, 26, 26, 0.4);
+  /* Dark theme colors */
+  --color-bg-primary: #222222;
+  --color-bg-secondary: #2a2a2a;
+  --color-bg-tertiary: #333333;
+  --color-bg-elevated: #2a2a2a;
+  --color-bg-overlay: rgba(0, 0, 0, 0.5);
 
-  /* Text - improved contrast ratios */
-  --color-text-primary: #1a1a1a;
-  --color-text-secondary: #5f6368;
-  --color-text-muted: #6b7280;
-  --color-text-placeholder: #9ca3af;
+  /* Text */
+  --color-text-primary: #f6f4f0;
+  --color-text-secondary: #c9c7c3;
+  --color-text-muted: #9a9894;
+  --color-text-placeholder: #6b6965;
 
-  /* Accent - blue with enhanced variations */
-  --color-accent: #1a73e8;
-  --color-accent-hover: #1557b0;
-  --color-accent-active: #0d3c7a;
-  --color-accent-muted: #4285f4;
-  --color-accent-glow: rgba(26, 115, 232, 0.12);
-  --color-accent-glow-strong: rgba(26, 115, 232, 0.2);
+  /* Accent - using text color for consistency */
+  --color-accent: #f6f4f0;
+  --color-accent-hover: #ffffff;
+  --color-accent-active: #d9d7d3;
+  --color-accent-muted: #c9c7c3;
+  --color-accent-glow: rgba(246, 244, 240, 0.12);
+  --color-accent-glow-strong: rgba(246, 244, 240, 0.2);
 
-  /* Semantic colors */
-  --color-success: #34a853;
-  --color-warning: #fbbc04;
-  --color-error: #ea4335;
+  /* Semantic colors - muted for dark theme */
+  --color-success: #7ac47f;
+  --color-warning: #f0c674;
+  --color-error: #cc6666;
 
-  /* Platform colors */
-  --color-google: #4285f4;
-  --color-shodan: #cc0000;
-  --color-github: #24292f;
-  --color-archive: #5c9eff;
-  --color-academic: #34a853;
+  /* Brand font */
+  --font-brand: 'Berkshire Swash', cursive;
 
   /* Spacing - refined scale */
   --space-xs: 0.25rem;    /* 4px */
@@ -47,7 +45,7 @@
   --space-page: clamp(1rem, 4vw, 2rem);
   --space-section: clamp(1.5rem, 6vw, 3rem);
 
-  /* Typography - enhanced system fonts */
+  /* Typography */
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'SF Mono', 'Cascadia Code', 'Fira Code', Monaco, Consolas, monospace;
 
@@ -73,17 +71,17 @@
   --radius-full: 9999px;
 
   /* Borders */
-  --border-subtle: 1px solid #e8eaed;
-  --border-default: 1px solid #dadce0;
-  --border-strong: 1px solid #bdc1c6;
+  --border-subtle: 1px solid #333333;
+  --border-default: 1px solid #444444;
+  --border-strong: 1px solid #555555;
 
-  /* Shadows - refined depth system */
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.04);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.06), 0 4px 6px rgba(0, 0, 0, 0.04);
-  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.08), 0 10px 10px rgba(0, 0, 0, 0.04);
-  --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+  /* Shadows - subtle for dark theme */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(0, 0, 0, 0.2);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.35), 0 10px 10px rgba(0, 0, 0, 0.2);
+  --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.3);
 
   /* Transitions - refined timing */
   --transition-fast: 120ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -91,8 +89,8 @@
   --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-spring: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
-  /* Layout */
-  --header-height: 3.5rem;
+  /* Layout - fluid header height */
+  --header-height: clamp(3rem, 2.5rem + 1.5vw, 3.5rem);
   --max-width: 56rem;
   --max-width-wide: 72rem;
 
@@ -109,7 +107,6 @@
   :root {
     --space-page: clamp(0.75rem, 3vw, 1rem);
     --space-section: clamp(1rem, 5vw, 1.5rem);
-    --header-height: 3rem;
   }
 }
 
@@ -170,7 +167,7 @@ body {
 /* Selection */
 ::selection {
   background: var(--color-accent);
-  color: white;
+  color: var(--color-bg-primary);
 }
 
 /* Typography - refined hierarchy */
@@ -280,7 +277,7 @@ img, svg {
   max-width: 100%;
 }
 
-svg {
+svg:not([fill="none"]) {
   fill: currentColor;
 }
 
@@ -306,26 +303,6 @@ svg {
   }
 }
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg-primary: #1a1a1a;
-    --color-bg-secondary: #2a2a2a;
-    --color-bg-tertiary: #3a3a3a;
-    --color-bg-elevated: #242424;
-    --color-bg-overlay: rgba(255, 255, 255, 0.1);
-    
-    --color-text-primary: #f5f5f5;
-    --color-text-secondary: #b0b0b0;
-    --color-text-muted: #808080;
-    --color-text-placeholder: #606060;
-    
-    --border-subtle: 1px solid #333333;
-    --border-default: 1px solid #404040;
-    --border-strong: 1px solid #555555;
-  }
-}
-
 /* Touch device optimizations - WCAG 2.2 compliant */
 @media (hover: none) and (pointer: coarse) {
   button, a[role="button"], input[type="button"], input[type="submit"] {
@@ -336,7 +313,7 @@ svg {
 
   /* Increase tap highlight for better feedback */
   button, a {
-    -webkit-tap-highlight-color: rgba(26, 115, 232, 0.2);
+    -webkit-tap-highlight-color: rgba(246, 244, 240, 0.2);
   }
 }
 

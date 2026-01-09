@@ -7,6 +7,7 @@ interface CopyButtonProps {
   label?: string
   size?: 'sm' | 'md' | 'lg'
   className?: string
+  disabled?: boolean
 }
 
 function CopyIcon() {
@@ -40,7 +41,13 @@ function CheckIcon() {
   )
 }
 
-export function CopyButton({ text, label, size = 'md', className = '' }: CopyButtonProps) {
+export function CopyButton({
+  text,
+  label,
+  size = 'md',
+  className = '',
+  disabled = false,
+}: CopyButtonProps) {
   const { copy, copied } = useClipboard()
 
   return (
@@ -51,6 +58,7 @@ export function CopyButton({ text, label, size = 'md', className = '' }: CopyBut
       onClick={() => copy(text)}
       className={`${styles.button} ${copied ? styles.copied : ''} ${className}`}
       aria-label={copied ? 'Kopiert!' : label || 'Kopier til utklippstavle'}
+      disabled={disabled}
     >
       {label && (copied ? 'Kopiert!' : label)}
     </Button>

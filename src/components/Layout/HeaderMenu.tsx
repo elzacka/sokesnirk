@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useMemo } from 'react'
 import type { Platform, QueryLanguage } from '@/types'
 import { PLATFORMS, QUERY_LANGUAGE_LABELS, getPlatform } from '@/data/platforms'
 import { MenuIcon, InfoIcon, XIcon, ChevronRightIcon } from '@/components/Icons'
@@ -52,12 +52,14 @@ export function HeaderMenu({ platform, onPlatformChange }: HeaderMenuProps) {
     setActivePanel('main')
   }
 
-  // Group platforms by query language
-  const platformsByQueryLanguage = QUERY_LANGUAGE_ORDER.map((queryLanguage) => ({
-    queryLanguage,
-    label: QUERY_LANGUAGE_LABELS[queryLanguage],
-    platforms: PLATFORMS.filter((p) => p.queryLanguage === queryLanguage),
-  })).filter((group) => group.platforms.length > 0)
+  // Group platforms by query language - memoized since PLATFORMS is static
+  const platformsByQueryLanguage = useMemo(() =>
+    QUERY_LANGUAGE_ORDER.map((queryLanguage) => ({
+      queryLanguage,
+      label: QUERY_LANGUAGE_LABELS[queryLanguage],
+      platforms: PLATFORMS.filter((p) => p.queryLanguage === queryLanguage),
+    })).filter((group) => group.platforms.length > 0)
+  , [])
 
   return (
     <div className={styles.menuContainer} ref={menuRef}>

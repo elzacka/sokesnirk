@@ -71,6 +71,36 @@
   color: var(--color-accent);
 }
 
+/* Info button for touch devices */
+.infoButton {
+  position: absolute;
+  top: -10px;
+  right: 8px;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  background: var(--color-bg-primary);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  z-index: 3;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--transition-base);
+}
+
+.infoButton:hover,
+.infoButton:focus {
+  color: var(--color-accent);
+}
+
+.infoButton svg {
+  width: 16px;
+  height: 16px;
+}
+
 /* Tooltip - positioned below field */
 .tooltip {
   position: absolute;
@@ -121,23 +151,26 @@
   word-break: break-word;
 }
 
-/* Arrow pointing up */
+/* Arrow pointing up - centered */
 .tooltip::after {
   content: '';
   position: absolute;
   bottom: 100%;
-  left: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   border: 7px solid transparent;
   border-bottom-color: var(--color-bg-elevated);
   filter: drop-shadow(0 -1px 1px rgba(0, 0, 0, 0.04));
 }
 
+/* Desktop: show on hover */
 .field:hover .tooltip {
   opacity: 1;
   visibility: visible;
   transition-delay: 500ms;
 }
 
+/* Hide tooltip when typing */
 .field:focus-within .tooltip {
   opacity: 0;
   visibility: hidden;
@@ -170,14 +203,34 @@
   }
 }
 
-/* Touch devices: disable hover tooltips */
+/* Touch devices: tap to show tooltip */
 @media (hover: none) {
+  /* Disable hover tooltips */
   .field:hover .tooltip {
     opacity: 0;
     visibility: hidden;
   }
 
+  /* Show tooltip when explicitly toggled */
+  .field.showTooltip .tooltip {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 0s;
+  }
+
   .input {
     min-height: 48px;
+  }
+
+  /* Make info button more prominent on touch */
+  .infoButton {
+    width: 24px;
+    height: 24px;
+  }
+
+  .infoButton svg {
+    width: 18px;
+    height: 18px;
   }
 }

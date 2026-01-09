@@ -75,13 +75,13 @@
 /* Variants */
 .primary {
   background: var(--color-accent);
-  color: white;
+  color: var(--color-bg-primary);
   border: none;
   box-shadow: var(--shadow-sm);
 }
 
 .primary::before {
-  background: white;
+  background: var(--color-bg-primary);
 }
 
 .primary:hover:not(:disabled) {

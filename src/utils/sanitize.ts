@@ -36,6 +36,7 @@ export function sanitizeQueryInput(input: string): string {
   if (typeof input !== 'string') return ''
 
   // Remove null bytes and control characters (except common whitespace)
+  // eslint-disable-next-line no-control-regex
   let sanitized = input.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '')
 
   // Normalize whitespace (collapse multiple spaces, trim)
@@ -58,7 +59,7 @@ export function sanitizeSearchQuery(query: string): string {
   if (typeof query !== 'string') return ''
 
   // Remove potential script injection patterns
-  let sanitized = query
+  const sanitized = query
     // Remove javascript: protocol
     .replace(/javascript:/gi, '')
     // Remove data: protocol
