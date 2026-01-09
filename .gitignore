@@ -1,0 +1,14 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# System files
+.DS_Store
+
+# TypeScript cache
+tsconfig.tsbuildinfo
+
+# For developer only
+dev_only/

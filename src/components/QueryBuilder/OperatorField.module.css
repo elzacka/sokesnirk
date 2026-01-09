@@ -1,0 +1,121 @@
+.field {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+  background: var(--color-bg-secondary);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.input::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.6;
+}
+
+.input:hover {
+  background: var(--color-bg-tertiary);
+}
+
+.input:focus {
+  outline: none;
+  background: var(--color-bg-primary);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-glow);
+}
+
+.field.hasValue .input {
+  background: var(--color-bg-primary);
+  border-color: var(--color-accent);
+}
+
+/* Label */
+.label {
+  position: absolute;
+  top: -7px;
+  left: 10px;
+  padding: 0 4px;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  background: var(--color-bg-primary);
+  transition: color var(--transition-fast);
+}
+
+.field:focus-within .label,
+.field.hasValue .label {
+  color: var(--color-accent);
+}
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  max-width: 320px;
+  min-width: 200px;
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  color: var(--color-text-primary);
+  background: var(--color-bg-elevated);
+  border: var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  white-space: normal;
+  text-align: left;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+  pointer-events: none;
+}
+
+.tooltipDescription {
+  margin: 0 0 6px 0;
+  color: var(--color-text-secondary);
+}
+
+.tooltipExample {
+  margin: 0;
+  padding-top: 6px;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.tooltipExample code {
+  padding: 2px 5px;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--color-accent);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-sm);
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--color-bg-elevated);
+}
+
+.field:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0.5s;
+}
+
+.field:focus-within .tooltip {
+  opacity: 0;
+  visibility: hidden;
+  transition-delay: 0s;
+}

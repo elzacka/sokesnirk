@@ -1,0 +1,143 @@
+.builder {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+/* Preview */
+.previewSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+}
+
+.previewSection > :first-child {
+  flex: 1;
+  min-width: 0;
+}
+
+.previewActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-shrink: 0;
+}
+
+.clearButton {
+  padding: 6px 12px;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.clearButton:hover {
+  color: var(--color-error);
+}
+
+/* Category sections */
+.categorySections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.categorySection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.categoryTitle {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* Operator grid */
+.operatorGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 14px 12px;
+}
+
+/* Inline field for free text */
+.field {
+  position: relative;
+}
+
+.fieldLabel {
+  position: absolute;
+  top: -7px;
+  left: 10px;
+  padding: 0 4px;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  background: var(--color-bg-primary);
+  transition: color var(--transition-fast);
+}
+
+.field:focus-within .fieldLabel,
+.field.hasValue .fieldLabel {
+  color: var(--color-accent);
+}
+
+.fieldInput {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+  background: var(--color-bg-secondary);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.fieldInput:hover {
+  background: var(--color-bg-tertiary);
+}
+
+.fieldInput:focus {
+  outline: none;
+  background: var(--color-bg-primary);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-glow);
+}
+
+.field.hasValue .fieldInput {
+  background: var(--color-bg-primary);
+  border-color: var(--color-accent);
+}
+
+@media (max-width: 640px) {
+  .previewSection {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-sm);
+  }
+
+  .previewActions {
+    justify-content: flex-end;
+  }
+
+  .operatorGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 400px) {
+  .operatorGrid {
+    grid-template-columns: 1fr;
+  }
+}
