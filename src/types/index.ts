@@ -38,8 +38,7 @@ export interface Operator {
   name: string
   syntax: string
   description: string
-  example: string
-  exampleResult: string
+  inputExample: string
   category: OperatorCategory
   platforms: Platform[]
   level: UserLevel

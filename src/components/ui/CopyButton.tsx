@@ -45,7 +45,7 @@ export function CopyButton({ text, label, size = 'md', className = '' }: CopyBut
 
   return (
     <Button
-      variant={copied ? 'primary' : 'secondary'}
+      variant="primary"
       size={size}
       icon={copied ? <CheckIcon /> : <CopyIcon />}
       onClick={() => copy(text)}

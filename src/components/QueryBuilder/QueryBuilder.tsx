@@ -1,12 +1,10 @@
 import { useState, useMemo } from 'react'
 import type { Platform, OperatorCategory } from '@/types'
 import { getOperatorsByPlatform } from '@/data/operators'
-import { getPlatform } from '@/data/platforms'
 import { sanitizeQueryInput, sanitizeSearchQuery } from '@/utils/sanitize'
 import { CopyButton } from '@/components/ui'
 import { OperatorField } from './OperatorField'
 import { QueryPreview } from './QueryPreview'
-import { ServiceIndicator } from './ServiceIndicator'
 import styles from './QueryBuilder.module.css'
 
 const CATEGORY_LABELS: Record<OperatorCategory, string> = {
@@ -36,7 +34,6 @@ interface QueryBuilderProps {
 export function QueryBuilder({ platform }: QueryBuilderProps) {
   const [operatorValues, setOperatorValues] = useState<Record<string, string>>({})
   const [freeText, setFreeText] = useState('')
-  const platformConfig = getPlatform(platform)
 
   // Get operators grouped by category
   const operatorsByCategory = useMemo(() => {
@@ -113,9 +110,6 @@ export function QueryBuilder({ platform }: QueryBuilderProps) {
 
   return (
     <div className={styles.builder}>
-      {/* Service indicator */}
-      {platformConfig && <ServiceIndicator platform={platformConfig} />}
-
       {/* Query preview and actions - visible when there's content */}
       {queryString && (
         <div className={styles.previewSection}>

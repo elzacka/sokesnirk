@@ -26,7 +26,7 @@ export function OperatorField({
       <div className={styles.tooltip} id={`tooltip-${operator.id}`} role="tooltip">
         <p className={styles.tooltipDescription}>{operator.description}</p>
         <p className={styles.tooltipExample}>
-          <code>{operator.example}</code> → {operator.exampleResult}
+          Eks: <code>{operator.inputExample}</code>
         </p>
       </div>
     </div>
