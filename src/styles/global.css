@@ -10,7 +10,8 @@
   /* Text */
   --color-text-primary: #1a1a1a;
   --color-text-secondary: #5f6368;
-  --color-text-muted: #9aa0a6;
+  --color-text-muted: #6b7280;
+  --color-text-placeholder: #6b7280;
 
   /* Accent - blue */
   --color-accent: #1a73e8;
@@ -155,7 +156,7 @@ input, textarea, select {
 
 input::placeholder,
 textarea::placeholder {
-  color: var(--color-text-muted);
+  color: var(--color-text-placeholder);
 }
 
 /* List reset */
