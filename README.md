@@ -1,5 +1,7 @@
 # Søkesnirk
 
+**[Åpne Søkesnirk](https://elzacka.github.io/sokesnirk/)**
+
 PWA for å bygge avanserte søkestrenger med operatorer for ulike søkeplattformer.
 
 Ulike plattformer bruker ulik søkesyntaks. Søkesnirk hjelper deg å:
@@ -29,7 +31,7 @@ npm run dev
 1. Velg plattform fra menyen
 2. Fyll inn verdier i operatorfeltene
 3. Se søkestrengen bygges i sanntid
-4. Kopier søkestrengen og lim inn i valgt søkemotor
+4. Kopier søkestrengen og lim inn i valgt plattform
 
 ## Plattformer
 
