@@ -12,3 +12,5 @@ tsconfig.tsbuildinfo
 
 # For developer only
 dev_only/
+.obsidian/
+.claude/
