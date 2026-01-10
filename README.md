@@ -17,7 +17,7 @@ Ulike plattformer bruker ulik søkesyntaks. Søkesnirk hjelper deg å:
 - Kopier ferdig søkestreng til utklippstavlen
 - Tooltips med forklaring og eksempler på hver operator
 - Responsivt design med optimalisert mobilopplevelse
-- Touch-vennlige tooltips med slide-up modal på mobil
+- Touch-vennlige tooltips med long-press og slide-up modal på mobil
 - WCAG 2.2 AA-kompatibelt (44px touch targets, god kontrast)
 - Fungerer offline (PWA)
 

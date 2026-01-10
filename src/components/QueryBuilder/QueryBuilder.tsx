@@ -1,20 +1,12 @@
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo } from 'react'
 import type { Platform, OperatorCategory, Operator } from '@/types'
 import { getOperatorsByPlatform } from '@/data/operators/index'
 import { sanitizeQueryInput, sanitizeSearchQuery } from '@/utils/sanitize'
+import { useIsTouchDevice } from '@/hooks/useIsTouchDevice'
 import { CopyButton } from '@/components/ui'
 import { OperatorField } from './OperatorField'
 import { QueryPreview } from './QueryPreview'
 import styles from './QueryBuilder.module.css'
-
-// Check if device is touch-based
-function useIsTouchDevice() {
-  const [isTouch, setIsTouch] = useState(false)
-  useEffect(() => {
-    setIsTouch(window.matchMedia('(hover: none)').matches)
-  }, [])
-  return isTouch
-}
 
 const FREE_TEXT_OPERATOR: Operator = {
   id: 'free-text',
@@ -24,7 +16,6 @@ const FREE_TEXT_OPERATOR: Operator = {
   inputExample: 'klimaendringer',
   category: 'basic',
   platforms: [],
-  level: 'beginner',
 }
 
 const CATEGORY_ORDER: OperatorCategory[] = [
@@ -146,7 +137,7 @@ export function QueryBuilder({ platform }: QueryBuilderProps) {
 
       {/* Section intro with hint - different for touch vs hover */}
       <p className={styles.sectionHint}>
-        {isTouchDevice ? 'Trykk ⓘ for veiledning' : 'Hold over feltene for veiledning'}
+        {isTouchDevice ? 'Fyll ut feltene du trenger. Hold inne et felt for veiledning.' : 'Fyll ut feltene du trenger. Hold over feltene for veiledning.'}
       </p>
 
       {/* All operators in a unified flow */}

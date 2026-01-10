@@ -9,7 +9,6 @@ export const GITHUB_OPERATORS: Operator[] = [
     inputExample: 'facebook/react',
     category: 'filter',
     platforms: ['github'],
-    level: 'beginner',
   },
   {
     id: 'github-user',
@@ -19,7 +18,6 @@ export const GITHUB_OPERATORS: Operator[] = [
     inputExample: 'torvalds',
     category: 'filter',
     platforms: ['github'],
-    level: 'beginner',
   },
   {
     id: 'github-org',
@@ -29,7 +27,6 @@ export const GITHUB_OPERATORS: Operator[] = [
     inputExample: 'microsoft',
     category: 'filter',
     platforms: ['github'],
-    level: 'beginner',
   },
   {
     id: 'github-language',
@@ -39,7 +36,6 @@ export const GITHUB_OPERATORS: Operator[] = [
     inputExample: 'python',
     category: 'filter',
     platforms: ['github'],
-    level: 'beginner',
   },
   {
     id: 'github-path',
@@ -49,7 +45,6 @@ export const GITHUB_OPERATORS: Operator[] = [
     inputExample: 'src/components',
     category: 'filter',
     platforms: ['github'],
-    level: 'advanced',
   },
   {
     id: 'github-filename',
@@ -59,7 +54,6 @@ export const GITHUB_OPERATORS: Operator[] = [
     inputExample: 'package.json',
     category: 'file',
     platforms: ['github'],
-    level: 'advanced',
   },
   {
     id: 'github-extension',
@@ -69,7 +63,6 @@ export const GITHUB_OPERATORS: Operator[] = [
     inputExample: 'yml',
     category: 'file',
     platforms: ['github'],
-    level: 'advanced',
   },
   {
     id: 'github-symbol',
@@ -79,7 +72,6 @@ export const GITHUB_OPERATORS: Operator[] = [
     inputExample: 'useState',
     category: 'filter',
     platforms: ['github'],
-    level: 'advanced',
   },
   {
     id: 'github-stars',
@@ -89,7 +81,6 @@ export const GITHUB_OPERATORS: Operator[] = [
     inputExample: '>1000',
     category: 'filter',
     platforms: ['github'],
-    level: 'advanced',
   },
   {
     id: 'github-forks',
@@ -99,17 +90,15 @@ export const GITHUB_OPERATORS: Operator[] = [
     inputExample: '>100',
     category: 'filter',
     platforms: ['github'],
-    level: 'advanced',
   },
   {
     id: 'github-pushed',
     name: 'Sist oppdatert',
     syntax: 'pushed:>YYYY-MM-DD',
     description: 'Finner prosjekter med nylige commits',
-    inputExample: '>2024-01-01',
+    inputExample: '>2026-01-01',
     category: 'date',
     platforms: ['github'],
-    level: 'advanced',
   },
   {
     id: 'github-is',
@@ -119,6 +108,5 @@ export const GITHUB_OPERATORS: Operator[] = [
     inputExample: 'public',
     category: 'filter',
     platforms: ['github'],
-    level: 'advanced',
   },
 ]

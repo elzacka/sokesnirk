@@ -1,7 +1,7 @@
 import type { Operator } from '@/types'
 
 export const GOOGLE_OPERATORS: Operator[] = [
-  // Nettsted-operatorer
+  // Nettsted og domene
   {
     id: 'site',
     name: 'Søk på ett nettsted',
@@ -10,8 +10,27 @@ export const GOOGLE_OPERATORS: Operator[] = [
     inputExample: 'vg.no',
     category: 'site',
     platforms: ['google'],
-    level: 'beginner',
   },
+  {
+    id: 'related',
+    name: 'Lignende nettsteder',
+    syntax: 'related:domene.no',
+    description: 'Finner nettsteder som ligner på det oppgitte domenet',
+    inputExample: 'vg.no',
+    category: 'site',
+    platforms: ['google'],
+  },
+  {
+    id: 'cache',
+    name: 'Bufret versjon',
+    syntax: 'cache:url',
+    description: 'Viser Googles lagrede kopi av en nettside',
+    inputExample: 'example.com',
+    category: 'site',
+    platforms: ['google'],
+  },
+
+  // Søk i URL
   {
     id: 'inurl',
     name: 'Ord i nettadressen',
@@ -20,7 +39,6 @@ export const GOOGLE_OPERATORS: Operator[] = [
     inputExample: 'login',
     category: 'site',
     platforms: ['google'],
-    level: 'advanced',
   },
   {
     id: 'allinurl',
@@ -30,8 +48,9 @@ export const GOOGLE_OPERATORS: Operator[] = [
     inputExample: 'admin login',
     category: 'site',
     platforms: ['google'],
-    level: 'advanced',
   },
+
+  // Søk i tittel
   {
     id: 'intitle',
     name: 'Ord i sidetittelen',
@@ -40,7 +59,6 @@ export const GOOGLE_OPERATORS: Operator[] = [
     inputExample: 'årsrapport',
     category: 'site',
     platforms: ['google'],
-    level: 'advanced',
   },
   {
     id: 'allintitle',
@@ -50,8 +68,9 @@ export const GOOGLE_OPERATORS: Operator[] = [
     inputExample: 'klima rapport Norge',
     category: 'site',
     platforms: ['google'],
-    level: 'advanced',
   },
+
+  // Søk i brødtekst
   {
     id: 'intext',
     name: 'Ord i brødteksten',
@@ -60,7 +79,6 @@ export const GOOGLE_OPERATORS: Operator[] = [
     inputExample: 'konfidensielt',
     category: 'site',
     platforms: ['google'],
-    level: 'advanced',
   },
   {
     id: 'allintext',
@@ -70,22 +88,49 @@ export const GOOGLE_OPERATORS: Operator[] = [
     inputExample: 'passord brukernavn',
     category: 'site',
     platforms: ['google'],
-    level: 'advanced',
   },
 
-  // Fil-operatorer
+  // Søk i lenketekst
+  {
+    id: 'inanchor',
+    name: 'Ord i lenketekst',
+    syntax: 'inanchor:tekst',
+    description: 'Finner sider som lenkes til med denne teksten',
+    inputExample: 'klikk her',
+    category: 'site',
+    platforms: ['google'],
+  },
+  {
+    id: 'allinanchor',
+    name: 'Alle ord i lenketekst',
+    syntax: 'allinanchor:ord1 ord2',
+    description: 'Finner sider som lenkes til med alle ordene. Ikke kombiner med andre operatorer',
+    inputExample: 'gratis nedlasting',
+    category: 'site',
+    platforms: ['google'],
+  },
+
+  // Fil og media
   {
     id: 'filetype',
     name: 'Filtype',
     syntax: 'filetype:pdf',
-    description: 'Finner kun filer av denne typen (pdf, doc, xls, ppt, txt, csv)',
+    description: 'Finner kun filer av typen du skriver inn (f.eks pdf, docx, xlsx, ppt)',
     inputExample: 'pdf',
     category: 'file',
     platforms: ['google'],
-    level: 'beginner',
+  },
+  {
+    id: 'imagesize',
+    name: 'Bildestørrelse',
+    syntax: 'imagesize:BxH',
+    description: 'Finner bilder med spesifikk oppløsning (kun i Google Bilder)',
+    inputExample: '1920x1080',
+    category: 'file',
+    platforms: ['google'],
   },
 
-  // Dato-operatorer
+  // Dato
   {
     id: 'before',
     name: 'Indeksert før',
@@ -94,7 +139,6 @@ export const GOOGLE_OPERATORS: Operator[] = [
     inputExample: '2024-01-01',
     category: 'date',
     platforms: ['google'],
-    level: 'advanced',
   },
   {
     id: 'after',
@@ -104,10 +148,9 @@ export const GOOGLE_OPERATORS: Operator[] = [
     inputExample: '2024-01-01',
     category: 'date',
     platforms: ['google'],
-    level: 'advanced',
   },
 
-  // Avanserte operatorer
+  // Avansert
   {
     id: 'around',
     name: 'Ord nær hverandre',
@@ -116,7 +159,6 @@ export const GOOGLE_OPERATORS: Operator[] = [
     inputExample: '"klima" AROUND(3) "krise"',
     category: 'advanced',
     platforms: ['google'],
-    level: 'expert',
   },
   {
     id: 'define',
@@ -126,6 +168,14 @@ export const GOOGLE_OPERATORS: Operator[] = [
     inputExample: 'epistemologi',
     category: 'advanced',
     platforms: ['google'],
-    level: 'beginner',
+  },
+  {
+    id: 'source',
+    name: 'Nyhetskilde',
+    syntax: 'source:kildenavn',
+    description: 'Begrenser til nyheter fra en spesifikk kilde (kun i Google Nyheter)',
+    inputExample: 'nrk',
+    category: 'advanced',
+    platforms: ['google'],
   },
 ]

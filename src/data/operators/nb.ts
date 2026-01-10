@@ -9,7 +9,6 @@ export const NB_OPERATORS: Operator[] = [
     inputExample: '"Ibsen Bjørnson"~5',
     category: 'advanced',
     platforms: ['nb'],
-    level: 'advanced',
   },
   {
     id: 'nb-fuzzy',
@@ -19,7 +18,6 @@ export const NB_OPERATORS: Operator[] = [
     inputExample: 'Larsen~1',
     category: 'advanced',
     platforms: ['nb'],
-    level: 'advanced',
   },
   {
     id: 'nb-title',
@@ -29,7 +27,6 @@ export const NB_OPERATORS: Operator[] = [
     inputExample: 'Ibsen',
     category: 'filter',
     platforms: ['nb'],
-    level: 'beginner',
   },
   {
     id: 'nb-freetext',
@@ -39,7 +36,6 @@ export const NB_OPERATORS: Operator[] = [
     inputExample: 'på folkemunne',
     category: 'filter',
     platforms: ['nb'],
-    level: 'advanced',
   },
   {
     id: 'nb-creator',
@@ -49,7 +45,6 @@ export const NB_OPERATORS: Operator[] = [
     inputExample: 'Hamsun',
     category: 'filter',
     platforms: ['nb'],
-    level: 'beginner',
   },
   {
     id: 'nb-year',
@@ -59,7 +54,6 @@ export const NB_OPERATORS: Operator[] = [
     inputExample: '1890',
     category: 'date',
     platforms: ['nb'],
-    level: 'beginner',
   },
   {
     id: 'nb-mediatype',
@@ -69,6 +63,5 @@ export const NB_OPERATORS: Operator[] = [
     inputExample: 'aviser',
     category: 'filter',
     platforms: ['nb'],
-    level: 'beginner',
   },
 ]

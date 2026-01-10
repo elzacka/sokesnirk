@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import type { UserPreferences, Platform, UserLevel } from '@/types'
+import type { UserPreferences, Platform } from '@/types'
 import { DEFAULT_PREFERENCES } from '@/types'
 
 const STORAGE_KEY = 'sokesnirk-preferences'
@@ -31,10 +31,6 @@ export function usePreferences() {
     savePreferences(preferences)
   }, [preferences])
 
-  const setLevel = useCallback((level: UserLevel) => {
-    setPreferencesState((prev) => ({ ...prev, level }))
-  }, [])
-
   const togglePlatform = useCallback((platformId: Platform) => {
     setPreferencesState((prev) => {
       const enabled = prev.enabledPlatforms.includes(platformId)
@@ -55,7 +51,6 @@ export function usePreferences() {
 
   return {
     preferences,
-    setLevel,
     togglePlatform,
     setDefaultPlatform,
     resetPreferences,

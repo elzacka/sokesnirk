@@ -1,4 +1,4 @@
-import type { Operator } from '@/types'
+import type { Operator, Platform } from '@/types'
 import { BASIC_OPERATORS } from './basic'
 import { GOOGLE_OPERATORS } from './google'
 import { NB_OPERATORS } from './nb'
@@ -21,18 +21,12 @@ export const OPERATORS: Operator[] = [
   ...AZURE_OPERATORS,
 ]
 
-export function getOperatorsByPlatform(platformId: string): Operator[] {
-  return OPERATORS.filter((op) => op.platforms.includes(platformId as never))
+export function getOperatorsByPlatform(platformId: Platform): Operator[] {
+  return OPERATORS.filter((op) => op.platforms.includes(platformId))
 }
 
 export function getOperatorsByCategory(category: string): Operator[] {
   return OPERATORS.filter((op) => op.category === category)
-}
-
-export function getOperatorsByLevel(level: string): Operator[] {
-  const levels = ['beginner', 'advanced', 'expert']
-  const maxIndex = levels.indexOf(level)
-  return OPERATORS.filter((op) => levels.indexOf(op.level) <= maxIndex)
 }
 
 export function searchOperators(query: string): Operator[] {

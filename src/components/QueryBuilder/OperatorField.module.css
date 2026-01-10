@@ -71,36 +71,6 @@
   color: var(--color-accent);
 }
 
-/* Info button for touch devices */
-.infoButton {
-  position: absolute;
-  top: -10px;
-  right: 8px;
-  width: 20px;
-  height: 20px;
-  padding: 0;
-  border: none;
-  background: var(--color-bg-primary);
-  color: var(--color-text-muted);
-  cursor: pointer;
-  z-index: 3;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: color var(--transition-base);
-}
-
-.infoButton:hover,
-.infoButton:focus {
-  color: var(--color-accent);
-}
-
-.infoButton svg {
-  width: 16px;
-  height: 16px;
-}
-
 /* Tooltip - positioned below field */
 .tooltip {
   position: absolute;
@@ -297,7 +267,7 @@
   }
 }
 
-/* Touch devices: tap to show tooltip */
+/* Touch devices: long press to show tooltip */
 @media (hover: none) {
   /* Disable hover tooltips */
   .field:hover .tooltip {
@@ -315,16 +285,5 @@
 
   .input {
     min-height: 44px;
-  }
-
-  /* Make info button more prominent on touch */
-  .infoButton {
-    width: 24px;
-    height: 24px;
-  }
-
-  .infoButton svg {
-    width: 18px;
-    height: 18px;
   }
 }

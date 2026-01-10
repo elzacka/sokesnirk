@@ -29,7 +29,7 @@ src/
 ├── data/
 │   ├── operators/       # Operatorer per plattform (én fil per plattform)
 │   └── platforms.ts     # Plattformkonfigurasjon
-├── hooks/               # Custom hooks
+├── hooks/               # Custom hooks (useClipboard, useIsTouchDevice, usePreferences)
 ├── pages/               # Sidekomponenter
 ├── styles/              # Global CSS
 └── types/               # TypeScript-typer
@@ -52,6 +52,6 @@ Organisert etter query language:
 - Norsk UI-tekst
 - Ingen eksterne ikonbibliotek (egne SVG-ikoner i Icons.tsx)
 - Floating label-mønster i skjemafelt
-- Tooltip med hover-delay på desktop, tap-to-show på mobil
+- Tooltip med hover-delay på desktop, long-press på mobil
 - WCAG 2.2 AA: 44px touch targets, 4.5:1 kontrast
 - iOS safe area support for notch/home indicator

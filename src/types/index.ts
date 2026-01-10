@@ -31,8 +31,6 @@ export type OperatorCategory =
   | 'advanced'
   | 'security'
 
-export type UserLevel = 'beginner' | 'advanced' | 'expert'
-
 export interface Operator {
   id: string
   name: string
@@ -41,7 +39,6 @@ export interface Operator {
   inputExample: string
   category: OperatorCategory
   platforms: Platform[]
-  level: UserLevel
 }
 
 export interface PlatformConfig {
@@ -61,7 +58,6 @@ export interface Template {
   description: string
   category: string
   platforms: Platform[]
-  level: UserLevel
   query: string
   variables: TemplateVariable[]
 }
@@ -81,14 +77,12 @@ export interface QueryPart {
 }
 
 export interface UserPreferences {
-  level: UserLevel
   enabledPlatforms: Platform[]
   theme: 'dark' | 'light' | 'system'
   defaultPlatform: Platform
 }
 
 export const DEFAULT_PREFERENCES: UserPreferences = {
-  level: 'beginner',
   enabledPlatforms: ['google', 'github', 'nb'],
   theme: 'light',
   defaultPlatform: 'google',

@@ -9,7 +9,6 @@ export const JIRA_OPERATORS: Operator[] = [
     inputExample: 'DEV',
     category: 'filter',
     platforms: ['jira'],
-    level: 'beginner',
   },
   {
     id: 'jira-status',
@@ -19,7 +18,6 @@ export const JIRA_OPERATORS: Operator[] = [
     inputExample: 'In Progress',
     category: 'filter',
     platforms: ['jira'],
-    level: 'beginner',
   },
   {
     id: 'jira-assignee',
@@ -29,7 +27,6 @@ export const JIRA_OPERATORS: Operator[] = [
     inputExample: 'currentUser()',
     category: 'filter',
     platforms: ['jira'],
-    level: 'beginner',
   },
   {
     id: 'jira-reporter',
@@ -39,7 +36,6 @@ export const JIRA_OPERATORS: Operator[] = [
     inputExample: 'ola.nordmann',
     category: 'filter',
     platforms: ['jira'],
-    level: 'beginner',
   },
   {
     id: 'jira-type',
@@ -49,7 +45,6 @@ export const JIRA_OPERATORS: Operator[] = [
     inputExample: 'Bug',
     category: 'filter',
     platforms: ['jira'],
-    level: 'beginner',
   },
   {
     id: 'jira-priority',
@@ -59,7 +54,6 @@ export const JIRA_OPERATORS: Operator[] = [
     inputExample: 'High',
     category: 'filter',
     platforms: ['jira'],
-    level: 'beginner',
   },
   {
     id: 'jira-created',
@@ -69,7 +63,6 @@ export const JIRA_OPERATORS: Operator[] = [
     inputExample: '-7d',
     category: 'date',
     platforms: ['jira'],
-    level: 'advanced',
   },
   {
     id: 'jira-updated',
@@ -79,7 +72,6 @@ export const JIRA_OPERATORS: Operator[] = [
     inputExample: '-1d',
     category: 'date',
     platforms: ['jira'],
-    level: 'advanced',
   },
   {
     id: 'jira-resolution',
@@ -89,7 +81,6 @@ export const JIRA_OPERATORS: Operator[] = [
     inputExample: 'Unresolved',
     category: 'filter',
     platforms: ['jira'],
-    level: 'advanced',
   },
   {
     id: 'jira-labels',
@@ -99,7 +90,6 @@ export const JIRA_OPERATORS: Operator[] = [
     inputExample: 'backend',
     category: 'filter',
     platforms: ['jira'],
-    level: 'beginner',
   },
   {
     id: 'jira-text',
@@ -109,7 +99,6 @@ export const JIRA_OPERATORS: Operator[] = [
     inputExample: 'login error',
     category: 'basic',
     platforms: ['jira'],
-    level: 'beginner',
   },
   {
     id: 'jira-summary',
@@ -119,7 +108,6 @@ export const JIRA_OPERATORS: Operator[] = [
     inputExample: 'API',
     category: 'filter',
     platforms: ['jira'],
-    level: 'advanced',
   },
   {
     id: 'jira-was',
@@ -129,7 +117,6 @@ export const JIRA_OPERATORS: Operator[] = [
     inputExample: 'In Progress',
     category: 'advanced',
     platforms: ['jira'],
-    level: 'expert',
   },
   {
     id: 'jira-changed',
@@ -139,7 +126,6 @@ export const JIRA_OPERATORS: Operator[] = [
     inputExample: '-1w',
     category: 'advanced',
     platforms: ['jira'],
-    level: 'expert',
   },
   {
     id: 'jira-orderby',
@@ -149,6 +135,5 @@ export const JIRA_OPERATORS: Operator[] = [
     inputExample: 'created DESC',
     category: 'advanced',
     platforms: ['jira'],
-    level: 'advanced',
   },
 ]

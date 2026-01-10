@@ -9,7 +9,6 @@ export const SHODAN_OPERATORS: Operator[] = [
     inputExample: '22',
     category: 'security',
     platforms: ['shodan'],
-    level: 'expert',
   },
   {
     id: 'shodan-country',
@@ -19,7 +18,6 @@ export const SHODAN_OPERATORS: Operator[] = [
     inputExample: 'NO',
     category: 'filter',
     platforms: ['shodan'],
-    level: 'advanced',
   },
   {
     id: 'shodan-city',
@@ -29,7 +27,6 @@ export const SHODAN_OPERATORS: Operator[] = [
     inputExample: 'Oslo',
     category: 'filter',
     platforms: ['shodan'],
-    level: 'advanced',
   },
   {
     id: 'shodan-org',
@@ -39,7 +36,6 @@ export const SHODAN_OPERATORS: Operator[] = [
     inputExample: 'Telenor',
     category: 'filter',
     platforms: ['shodan'],
-    level: 'advanced',
   },
   {
     id: 'shodan-hostname',
@@ -49,7 +45,6 @@ export const SHODAN_OPERATORS: Operator[] = [
     inputExample: '.no',
     category: 'filter',
     platforms: ['shodan'],
-    level: 'advanced',
   },
   {
     id: 'shodan-net',
@@ -59,7 +54,6 @@ export const SHODAN_OPERATORS: Operator[] = [
     inputExample: '210.214.0.0/16',
     category: 'security',
     platforms: ['shodan'],
-    level: 'expert',
   },
   {
     id: 'shodan-os',
@@ -69,7 +63,6 @@ export const SHODAN_OPERATORS: Operator[] = [
     inputExample: 'Windows Server 2019',
     category: 'security',
     platforms: ['shodan'],
-    level: 'expert',
   },
   {
     id: 'shodan-product',
@@ -79,7 +72,6 @@ export const SHODAN_OPERATORS: Operator[] = [
     inputExample: 'nginx',
     category: 'filter',
     platforms: ['shodan'],
-    level: 'advanced',
   },
   {
     id: 'shodan-version',
@@ -89,7 +81,6 @@ export const SHODAN_OPERATORS: Operator[] = [
     inputExample: '2.4.41',
     category: 'security',
     platforms: ['shodan'],
-    level: 'expert',
   },
   {
     id: 'shodan-ssl',
@@ -99,7 +90,6 @@ export const SHODAN_OPERATORS: Operator[] = [
     inputExample: 'Equinor',
     category: 'security',
     platforms: ['shodan'],
-    level: 'expert',
   },
   {
     id: 'shodan-http-title',
@@ -109,7 +99,6 @@ export const SHODAN_OPERATORS: Operator[] = [
     inputExample: 'Dashboard',
     category: 'security',
     platforms: ['shodan'],
-    level: 'expert',
   },
   {
     id: 'shodan-http-status',
@@ -119,7 +108,6 @@ export const SHODAN_OPERATORS: Operator[] = [
     inputExample: '200',
     category: 'security',
     platforms: ['shodan'],
-    level: 'expert',
   },
   {
     id: 'shodan-has-screenshot',
@@ -129,6 +117,5 @@ export const SHODAN_OPERATORS: Operator[] = [
     inputExample: 'true',
     category: 'security',
     platforms: ['shodan'],
-    level: 'expert',
   },
 ]

@@ -9,7 +9,6 @@ export const AZURE_OPERATORS: Operator[] = [
     inputExample: 'Level == "Error"',
     category: 'filter',
     platforms: ['azure'],
-    level: 'beginner',
   },
   {
     id: 'kql-contains',
@@ -19,7 +18,6 @@ export const AZURE_OPERATORS: Operator[] = [
     inputExample: 'Message contains "timeout"',
     category: 'basic',
     platforms: ['azure'],
-    level: 'beginner',
   },
   {
     id: 'kql-has',
@@ -29,7 +27,6 @@ export const AZURE_OPERATORS: Operator[] = [
     inputExample: 'Message has "error"',
     category: 'basic',
     platforms: ['azure'],
-    level: 'advanced',
   },
   {
     id: 'kql-project',
@@ -39,7 +36,6 @@ export const AZURE_OPERATORS: Operator[] = [
     inputExample: 'TimeGenerated, Level, Message',
     category: 'filter',
     platforms: ['azure'],
-    level: 'beginner',
   },
   {
     id: 'kql-summarize',
@@ -49,7 +45,6 @@ export const AZURE_OPERATORS: Operator[] = [
     inputExample: 'count() by Level',
     category: 'advanced',
     platforms: ['azure'],
-    level: 'advanced',
   },
   {
     id: 'kql-timerange',
@@ -59,7 +54,6 @@ export const AZURE_OPERATORS: Operator[] = [
     inputExample: 'TimeGenerated > ago(24h)',
     category: 'date',
     platforms: ['azure'],
-    level: 'beginner',
   },
   {
     id: 'kql-between',
@@ -69,7 +63,6 @@ export const AZURE_OPERATORS: Operator[] = [
     inputExample: 'TimeGenerated between (ago(7d) .. ago(1d))',
     category: 'date',
     platforms: ['azure'],
-    level: 'advanced',
   },
   {
     id: 'kql-top',
@@ -79,7 +72,6 @@ export const AZURE_OPERATORS: Operator[] = [
     inputExample: '100 by TimeGenerated desc',
     category: 'filter',
     platforms: ['azure'],
-    level: 'beginner',
   },
   {
     id: 'kql-sort',
@@ -89,7 +81,6 @@ export const AZURE_OPERATORS: Operator[] = [
     inputExample: 'TimeGenerated desc',
     category: 'filter',
     platforms: ['azure'],
-    level: 'beginner',
   },
   {
     id: 'kql-extend',
@@ -99,7 +90,6 @@ export const AZURE_OPERATORS: Operator[] = [
     inputExample: 'DurationMs = Duration * 1000',
     category: 'advanced',
     platforms: ['azure'],
-    level: 'advanced',
   },
   {
     id: 'kql-join',
@@ -109,7 +99,6 @@ export const AZURE_OPERATORS: Operator[] = [
     inputExample: 'kind=inner (Heartbeat) on Computer',
     category: 'advanced',
     platforms: ['azure'],
-    level: 'expert',
   },
   {
     id: 'kql-render',
@@ -119,6 +108,5 @@ export const AZURE_OPERATORS: Operator[] = [
     inputExample: 'timechart',
     category: 'advanced',
     platforms: ['azure'],
-    level: 'advanced',
   },
 ]

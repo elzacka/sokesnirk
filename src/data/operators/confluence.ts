@@ -9,7 +9,6 @@ export const CONFLUENCE_OPERATORS: Operator[] = [
     inputExample: 'prosjektplan',
     category: 'basic',
     platforms: ['confluence'],
-    level: 'beginner',
   },
   {
     id: 'confluence-title',
@@ -19,7 +18,6 @@ export const CONFLUENCE_OPERATORS: Operator[] = [
     inputExample: 'møtereferat',
     category: 'filter',
     platforms: ['confluence'],
-    level: 'beginner',
   },
   {
     id: 'confluence-space',
@@ -29,7 +27,6 @@ export const CONFLUENCE_OPERATORS: Operator[] = [
     inputExample: 'DEV',
     category: 'filter',
     platforms: ['confluence'],
-    level: 'beginner',
   },
   {
     id: 'confluence-type',
@@ -39,7 +36,6 @@ export const CONFLUENCE_OPERATORS: Operator[] = [
     inputExample: 'page',
     category: 'filter',
     platforms: ['confluence'],
-    level: 'beginner',
   },
   {
     id: 'confluence-creator',
@@ -49,7 +45,6 @@ export const CONFLUENCE_OPERATORS: Operator[] = [
     inputExample: 'currentUser()',
     category: 'filter',
     platforms: ['confluence'],
-    level: 'advanced',
   },
   {
     id: 'confluence-contributor',
@@ -59,27 +54,24 @@ export const CONFLUENCE_OPERATORS: Operator[] = [
     inputExample: 'ola.nordmann',
     category: 'filter',
     platforms: ['confluence'],
-    level: 'advanced',
   },
   {
     id: 'confluence-created',
     name: 'Opprettelsesdato',
     syntax: 'created >= "YYYY-MM-DD"',
     description: 'Finner innhold opprettet fra og med denne datoen',
-    inputExample: '2024-01-01',
+    inputExample: '2026-01-01',
     category: 'date',
     platforms: ['confluence'],
-    level: 'advanced',
   },
   {
     id: 'confluence-lastmodified',
     name: 'Sist endret',
     syntax: 'lastModified >= "YYYY-MM-DD"',
     description: 'Finner innhold oppdatert etter denne datoen',
-    inputExample: '2024-06-01',
+    inputExample: '2025-07-01',
     category: 'date',
     platforms: ['confluence'],
-    level: 'advanced',
   },
   {
     id: 'confluence-label',
@@ -89,7 +81,6 @@ export const CONFLUENCE_OPERATORS: Operator[] = [
     inputExample: 'dokumentasjon',
     category: 'filter',
     platforms: ['confluence'],
-    level: 'beginner',
   },
   {
     id: 'confluence-ancestor',
@@ -99,7 +90,6 @@ export const CONFLUENCE_OPERATORS: Operator[] = [
     inputExample: '12345678',
     category: 'advanced',
     platforms: ['confluence'],
-    level: 'expert',
   },
   {
     id: 'confluence-parent',
@@ -109,6 +99,5 @@ export const CONFLUENCE_OPERATORS: Operator[] = [
     inputExample: '12345678',
     category: 'advanced',
     platforms: ['confluence'],
-    level: 'expert',
   },
 ]

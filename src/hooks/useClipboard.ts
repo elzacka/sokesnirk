@@ -1,14 +1,29 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useRef, useEffect } from 'react'
 
 export function useClipboard(resetDelay = 2000) {
   const [copied, setCopied] = useState(false)
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  // Clean up timeout on unmount to prevent memory leak
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
+    }
+  }, [])
 
   const copy = useCallback(
     async (text: string): Promise<boolean> => {
+      // Clear any existing timeout
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
+
       try {
         await navigator.clipboard.writeText(text)
         setCopied(true)
-        setTimeout(() => setCopied(false), resetDelay)
+        timeoutRef.current = setTimeout(() => setCopied(false), resetDelay)
         return true
       } catch {
         // Fallback for older browsers
@@ -22,7 +37,7 @@ export function useClipboard(resetDelay = 2000) {
           document.execCommand('copy')
           document.body.removeChild(textarea)
           setCopied(true)
-          setTimeout(() => setCopied(false), resetDelay)
+          timeoutRef.current = setTimeout(() => setCopied(false), resetDelay)
           return true
         } catch {
           return false

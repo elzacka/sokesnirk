@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback, memo } from 'react'
 import type { Operator } from '@/types'
+import { useIsTouchDevice } from '@/hooks/useIsTouchDevice'
 import styles from './OperatorField.module.css'
 
 interface OperatorFieldProps {
@@ -8,6 +9,9 @@ interface OperatorFieldProps {
   onChange: (value: string) => void
 }
 
+const LONG_PRESS_DURATION = 400 // ms
+const HAPTIC_FEEDBACK_DURATION = 10 // ms
+
 export const OperatorField = memo(function OperatorField({
   operator,
   value,
@@ -15,9 +19,10 @@ export const OperatorField = memo(function OperatorField({
 }: OperatorFieldProps) {
   const [showTooltip, setShowTooltip] = useState(false)
   const fieldRef = useRef<HTMLDivElement>(null)
-  const isTouchDevice = typeof window !== 'undefined' &&
-    window.matchMedia('(hover: none)').matches
+  const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const isTouchDevice = useIsTouchDevice()
 
+  // Close tooltip when clicking outside
   useEffect(() => {
     if (!isTouchDevice || !showTooltip) return
 
@@ -35,31 +40,51 @@ export const OperatorField = memo(function OperatorField({
     }
   }, [showTooltip, isTouchDevice])
 
-  const handleInfoClick = useCallback((e: React.MouseEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    setShowTooltip(!showTooltip)
-  }, [showTooltip])
+  // Clean up timer on unmount
+  useEffect(() => {
+    return () => {
+      if (longPressTimer.current) {
+        clearTimeout(longPressTimer.current)
+      }
+    }
+  }, [])
+
+  const handleTouchStart = useCallback(() => {
+    if (!isTouchDevice) return
+
+    longPressTimer.current = setTimeout(() => {
+      setShowTooltip(true)
+      // Vibrate for feedback if supported
+      if (navigator.vibrate) {
+        navigator.vibrate(HAPTIC_FEEDBACK_DURATION)
+      }
+    }, LONG_PRESS_DURATION)
+  }, [isTouchDevice])
+
+  const handleTouchEnd = useCallback(() => {
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current)
+      longPressTimer.current = null
+    }
+  }, [])
+
+  const handleTouchMove = useCallback(() => {
+    // Cancel long press if user moves finger
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current)
+      longPressTimer.current = null
+    }
+  }, [])
 
   return (
     <div
       ref={fieldRef}
       className={`${styles.field} ${value ? styles.hasValue : ''} ${showTooltip ? styles.showTooltip : ''}`}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      onTouchMove={handleTouchMove}
     >
       <span className={styles.label}>{operator.name}</span>
-      {isTouchDevice && (
-        <button
-          type="button"
-          className={styles.infoButton}
-          onClick={handleInfoClick}
-          aria-label={`Vis info om ${operator.name}`}
-          aria-expanded={showTooltip}
-        >
-          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-          </svg>
-        </button>
-      )}
       <input
         type="text"
         className={styles.input}

@@ -14,7 +14,7 @@
   --color-text-primary: #ffffff;      /* 15.7:1 */
   --color-text-secondary: #d4d2ce;    /* 11.5:1 */
   --color-text-muted: #a8a6a2;        /* 6.9:1 */
-  --color-text-placeholder: #807c78;  /* 4.6:1 */
+  --color-text-placeholder: #949088;  /* 5.0:1 - WCAG AA compliant */
 
   /* Accent - using text color for consistency */
   --color-accent: #f6f4f0;
@@ -27,7 +27,7 @@
   /* Semantic colors - muted for dark theme */
   --color-success: #7ac47f;
   --color-warning: #f0c674;
-  --color-error: #cc6666;
+  --color-error: #d88686;  /* 5.2:1 - WCAG AA compliant */
 
   /* Brand font */
   --font-brand: 'Berkshire Swash', cursive;
