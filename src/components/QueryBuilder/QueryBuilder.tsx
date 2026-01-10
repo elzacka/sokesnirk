@@ -13,7 +13,7 @@ const FREE_TEXT_OPERATOR: Operator = {
   name: 'Søkeord',
   syntax: 'ord',
   description: 'Vanlige søkeord uten spesielle operatorer. Legges til på slutten av søket',
-  inputExample: 'klimaendringer',
+  inputExample: 'apache',
   category: 'basic',
   platforms: [],
 }
