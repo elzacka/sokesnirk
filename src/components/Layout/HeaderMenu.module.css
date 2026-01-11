@@ -166,8 +166,27 @@
   flex-shrink: 0;
 }
 
+/* Backdrop for mobile dropdown */
+.backdrop {
+  display: none;
+}
+
 /* Mobile */
 @media (max-width: 640px) {
+  .backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: var(--color-bg-overlay);
+    z-index: calc(var(--z-dropdown) - 1);
+    animation: fadeIn 0.15s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
   .pickerButton {
     min-height: 44px;
     padding: 8px 12px;
@@ -175,13 +194,15 @@
 
   .dropdown {
     position: fixed;
-    top: max(var(--space-md), env(safe-area-inset-top));
+    top: auto;
     right: var(--space-md);
     left: var(--space-md);
-    bottom: max(var(--space-md), env(safe-area-inset-bottom));
+    bottom: calc(var(--space-xl) + env(safe-area-inset-bottom));
     min-width: 0;
-    max-height: none;
+    max-height: 60vh;
     overflow-y: auto;
+    border-radius: var(--radius-xl);
+    padding: var(--space-sm);
   }
 
   .platformOption {

@@ -61,28 +61,31 @@ export function HeaderMenu({ platform, onPlatformChange }: HeaderMenuProps) {
       </button>
 
       {isOpen && (
-        <div className={styles.dropdown} role="listbox">
-          {sortedPlatforms.map((p) => (
-            <button
-              key={p.id}
-              className={`${styles.platformOption} ${p.id === platform ? styles.selected : ''}`}
-              onClick={() => handlePlatformSelect(p.id)}
-              role="option"
-              aria-selected={p.id === platform}
-            >
-              <span
-                className={styles.platformBadge}
-                style={{ '--platform-color': p.color } as React.CSSProperties}
+        <>
+          <div className={styles.backdrop} onClick={() => setIsOpen(false)} />
+          <div className={styles.dropdown} role="listbox">
+            {sortedPlatforms.map((p) => (
+              <button
+                key={p.id}
+                className={`${styles.platformOption} ${p.id === platform ? styles.selected : ''}`}
+                onClick={() => handlePlatformSelect(p.id)}
+                role="option"
+                aria-selected={p.id === platform}
               >
-                {p.icon}
-              </span>
-              <span className={styles.platformName}>{p.name}</span>
-              <span className={styles.queryLanguageTag}>
-                {QUERY_LANGUAGE_LABELS[p.queryLanguage]}
-              </span>
-            </button>
-          ))}
-        </div>
+                <span
+                  className={styles.platformBadge}
+                  style={{ '--platform-color': p.color } as React.CSSProperties}
+                >
+                  {p.icon}
+                </span>
+                <span className={styles.platformName}>{p.name}</span>
+                <span className={styles.queryLanguageTag}>
+                  {QUERY_LANGUAGE_LABELS[p.queryLanguage]}
+                </span>
+              </button>
+            ))}
+          </div>
+        </>
       )}
     </div>
   )
