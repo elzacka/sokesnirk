@@ -2,6 +2,13 @@
   position: relative;
 }
 
+/* On mobile, remove relative positioning to allow fixed children to escape backdrop-filter stacking context */
+@media (max-width: 640px) {
+  .menuContainer {
+    position: static;
+  }
+}
+
 .pickerButton {
   display: flex;
   align-items: center;
@@ -179,12 +186,6 @@
     inset: 0;
     background: var(--color-bg-overlay);
     z-index: calc(var(--z-dropdown) - 1);
-    animation: fadeIn 0.15s ease-out;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
   }
 
   .pickerButton {
@@ -193,16 +194,19 @@
   }
 
   .dropdown {
+    /* Full reset - use sheet from bottom approach */
     position: fixed;
-    top: auto;
-    right: var(--space-md);
-    left: var(--space-md);
-    bottom: calc(var(--space-xl) + env(safe-area-inset-bottom));
+    inset: auto var(--space-md) calc(var(--space-xl) + env(safe-area-inset-bottom)) var(--space-md);
+    /* Constrain height properly */
+    max-height: min(60vh, calc(100vh - var(--header-height) - var(--space-xl) - env(safe-area-inset-top) - env(safe-area-inset-bottom)));
     min-width: 0;
-    max-height: 60vh;
     overflow-y: auto;
     border-radius: var(--radius-xl);
     padding: var(--space-sm);
+    /* Disable animation */
+    animation: none;
+    /* Override desktop z-index to ensure it's above header */
+    z-index: var(--z-modal);
   }
 
   .platformOption {
