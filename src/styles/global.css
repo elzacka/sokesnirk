@@ -1,6 +1,5 @@
 /* Søkesnirk - Dark theme design system */
-
-@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap');
+/* Font loaded via index.html for better performance */
 
 :root {
   /* Dark theme colors */
