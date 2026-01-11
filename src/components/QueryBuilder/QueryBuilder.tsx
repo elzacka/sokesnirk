@@ -8,6 +8,17 @@ import { OperatorField } from './OperatorField'
 import { QueryPreview } from './QueryPreview'
 import styles from './QueryBuilder.module.css'
 
+/**
+ * Transforms comma-separated input into OR/AND expression.
+ * Supports both "a,b,c" and "a, b, c" formats.
+ * Multi-word values are automatically quoted.
+ */
+function transformCommaInput(value: string, operator: 'OR' | 'AND'): string {
+  const parts = value.split(/\s*,\s*/).map(p => p.trim()).filter(Boolean)
+  if (parts.length <= 1) return value
+  return parts.map(p => p.includes(' ') ? `"${p}"` : p).join(` ${operator} `)
+}
+
 const FREE_TEXT_OPERATOR: Operator = {
   id: 'free-text',
   name: 'Søkeord',
@@ -79,8 +90,13 @@ export function QueryBuilder({ platform }: QueryBuilderProps) {
           const words = value.split(/\s+/).filter(Boolean)
           parts.push(...words.map((w) => `-${w}`))
         } else if (op.syntax === 'A OR B') {
-          // OR operator
-          parts.push(`(${value})`)
+          // OR operator - transform comma-separated input
+          const transformed = transformCommaInput(value, 'OR')
+          parts.push(`(${transformed})`)
+        } else if (op.syntax === 'A AND B') {
+          // AND operator - transform comma-separated input
+          const transformed = transformCommaInput(value, 'AND')
+          parts.push(`(${transformed})`)
         } else if (op.syntax === '*') {
           parts.push(value)
         } else if (op.syntax.includes('AROUND')) {
@@ -144,7 +160,7 @@ export function QueryBuilder({ platform }: QueryBuilderProps) {
           <span className={styles.labelText}>Filtrer søket</span>
           {!hasAnyInput && (
             <span className={styles.labelHint}>
-              {isTouchDevice ? 'hold inne felt for hjelp' : 'hold over felt for hjelp'}
+              {isTouchDevice ? 'Hold inne felt for hjelp. Eksempelet viser hva du skal skrive i feltet.' : 'Hold over felt for hjelp. Eksempelet viser hva du skal skrive i feltet.'}
             </span>
           )}
         </div>
