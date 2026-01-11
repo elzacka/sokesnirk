@@ -96,8 +96,8 @@
 
 .queryPlaceholder {
   font-size: var(--text-sm);
-  color: var(--color-text-placeholder);
-  white-space: nowrap;
+  color: var(--color-text-muted);
+  line-height: 1.4;
 }
 
 .queryActions {

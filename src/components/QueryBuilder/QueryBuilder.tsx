@@ -136,7 +136,7 @@ export function QueryBuilder({ platform }: QueryBuilderProps) {
           {queryString ? (
             <QueryPreview query={queryString} />
           ) : (
-            <span className={styles.queryPlaceholder}>Søkestrengen vises her</span>
+            <span className={styles.queryPlaceholder}>Velg tjeneste fra menyen. Fyll ut feltene du trenger. Kopier søkestrengen og lim inn der du skal søke.</span>
           )}
         </div>
         <div className={styles.queryActions}>
