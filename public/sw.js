@@ -48,11 +48,30 @@ self.addEventListener('fetch', (event) => {
   // Skip non-GET requests
   if (request.method !== 'GET') return
 
-  // Skip external requests
-  if (url.origin !== location.origin) return
-
   // Skip chrome-extension and other protocols
   if (!url.protocol.startsWith('http')) return
+
+  // Cache Google Fonts with cache-first strategy
+  if (url.origin === 'https://fonts.googleapis.com' || url.origin === 'https://fonts.gstatic.com') {
+    event.respondWith(
+      caches.match(request).then((cached) => {
+        if (cached) return cached
+        return fetch(request).then((response) => {
+          if (response.ok) {
+            const responseClone = response.clone()
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(request, responseClone)
+            })
+          }
+          return response
+        })
+      })
+    )
+    return
+  }
+
+  // Skip other external requests
+  if (url.origin !== location.origin) return
 
   // Navigation requests - network first, fallback to cache
   if (request.mode === 'navigate') {

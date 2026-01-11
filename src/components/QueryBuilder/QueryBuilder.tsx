@@ -114,6 +114,29 @@ export function QueryBuilder({ platform }: QueryBuilderProps) {
 
   return (
     <div className={styles.builder}>
+      {/* Query output bar - at top for visibility */}
+      <div className={`${styles.queryBar} ${hasAnyInput ? styles.hasQuery : ''}`}>
+        <div className={styles.queryOutput}>
+          {queryString ? (
+            <QueryPreview query={queryString} />
+          ) : (
+            <span className={styles.queryPlaceholder}>Søkestrengen vises her</span>
+          )}
+        </div>
+        <div className={styles.queryActions}>
+          {queryString && (
+            <button
+              className={styles.clearButton}
+              onClick={clearAll}
+              aria-label="Tøm alle felt"
+            >
+              Tøm
+            </button>
+          )}
+          <CopyButton text={queryString} size="sm" disabled={!queryString} />
+        </div>
+      </div>
+
       {/* Main workspace card */}
       <div className={styles.workspace}>
         {/* Section label */}
@@ -147,29 +170,6 @@ export function QueryBuilder({ platform }: QueryBuilderProps) {
             />
           ))
         })}
-        </div>
-      </div>
-
-      {/* Query output bar */}
-      <div className={`${styles.queryBar} ${hasAnyInput ? styles.hasQuery : ''}`}>
-        <div className={styles.queryOutput}>
-          {queryString ? (
-            <QueryPreview query={queryString} />
-          ) : (
-            <span className={styles.queryPlaceholder}>Søkestrengen vises her</span>
-          )}
-        </div>
-        <div className={styles.queryActions}>
-          {queryString && (
-            <button
-              className={styles.clearButton}
-              onClick={clearAll}
-              aria-label="Tøm alle felt"
-            >
-              Tøm
-            </button>
-          )}
-          <CopyButton text={queryString} size="sm" disabled={!queryString} />
         </div>
       </div>
     </div>
