@@ -85,6 +85,7 @@
   min-width: 220px;
   max-height: min(400px, 70vh);
   overflow-y: auto;
+  overscroll-behavior: contain;
   background: var(--color-bg-elevated);
   border: var(--border-default);
   border-radius: var(--radius-lg);
@@ -92,6 +93,8 @@
   z-index: var(--z-dropdown);
   padding: var(--space-xs);
   animation: dropdownAppear 0.15s ease-out;
+  /* Allow vertical scroll only */
+  touch-action: pan-y;
 }
 
 @keyframes dropdownAppear {
@@ -172,14 +175,13 @@
 
   .dropdown {
     position: fixed;
-    top: var(--space-md);
     top: max(var(--space-md), env(safe-area-inset-top));
     right: var(--space-md);
     left: var(--space-md);
-    bottom: auto;
+    bottom: max(var(--space-md), env(safe-area-inset-bottom));
     min-width: 0;
-    max-height: calc(100vh - 120px);
-    max-height: calc(100dvh - 120px);
+    max-height: none;
+    overflow-y: auto;
   }
 
   .platformOption {

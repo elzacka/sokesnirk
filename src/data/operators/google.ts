@@ -4,7 +4,7 @@ export const GOOGLE_OPERATORS: Operator[] = [
   // Nettsted og domene
   {
     id: 'site',
-    name: 'Søk på ett nettsted',
+    name: 'Nettsted',
     syntax: 'site:domene.no',
     description: 'Begrenser søket til ett domene, underdomene eller URL-prefiks',
     inputExample: 'vg.no',
@@ -22,9 +22,9 @@ export const GOOGLE_OPERATORS: Operator[] = [
   },
   {
     id: 'cache',
-    name: 'Bufret versjon',
+    name: 'Cache',
     syntax: 'cache:url',
-    description: 'Viser Googles lagrede kopi av en nettside',
+    description: 'Viser Googles lagrede kopi av en side. Fungerer sjelden i dag',
     inputExample: 'example.com',
     category: 'site',
     platforms: ['google'],
@@ -33,7 +33,7 @@ export const GOOGLE_OPERATORS: Operator[] = [
   // Søk i URL
   {
     id: 'inurl',
-    name: 'Ord i nettadressen',
+    name: 'Ord i URL',
     syntax: 'inurl:tekst',
     description: 'Finner sider der URL-en inneholder dette ordet',
     inputExample: 'login',
@@ -53,7 +53,7 @@ export const GOOGLE_OPERATORS: Operator[] = [
   // Søk i tittel
   {
     id: 'intitle',
-    name: 'Ord i sidetittelen',
+    name: 'Ord i tittel',
     syntax: 'intitle:tekst',
     description: 'Finner sider der tittelen inneholder dette ordet',
     inputExample: 'årsrapport',
@@ -62,7 +62,7 @@ export const GOOGLE_OPERATORS: Operator[] = [
   },
   {
     id: 'allintitle',
-    name: 'Alle ord i tittelen',
+    name: 'Alle i tittel',
     syntax: 'allintitle:ord1 ord2',
     description: 'Finner sider der tittelen inneholder alle ordene. Ikke kombiner med andre operatorer',
     inputExample: 'klima rapport Norge',
@@ -73,7 +73,7 @@ export const GOOGLE_OPERATORS: Operator[] = [
   // Søk i brødtekst
   {
     id: 'intext',
-    name: 'Ord i brødteksten',
+    name: 'Ord i tekst',
     syntax: 'intext:tekst',
     description: 'Søker kun i selve innholdet, ikke i titler eller URL-er',
     inputExample: 'konfidensielt',
@@ -82,7 +82,7 @@ export const GOOGLE_OPERATORS: Operator[] = [
   },
   {
     id: 'allintext',
-    name: 'Alle ord i brødtekst',
+    name: 'Alle i tekst',
     syntax: 'allintext:ord1 ord2',
     description: 'Alle ordene må finnes i brødteksten. Ikke kombiner med andre operatorer',
     inputExample: 'passord brukernavn',
@@ -93,7 +93,7 @@ export const GOOGLE_OPERATORS: Operator[] = [
   // Søk i lenketekst
   {
     id: 'inanchor',
-    name: 'Ord i lenketekst',
+    name: 'Ord i lenke',
     syntax: 'inanchor:tekst',
     description: 'Finner sider som lenkes til med denne teksten',
     inputExample: 'klikk her',
@@ -102,7 +102,7 @@ export const GOOGLE_OPERATORS: Operator[] = [
   },
   {
     id: 'allinanchor',
-    name: 'Alle ord i lenketekst',
+    name: 'Alle i lenke',
     syntax: 'allinanchor:ord1 ord2',
     description: 'Finner sider som lenkes til med alle ordene. Ikke kombiner med andre operatorer',
     inputExample: 'gratis nedlasting',
@@ -135,7 +135,7 @@ export const GOOGLE_OPERATORS: Operator[] = [
     id: 'before',
     name: 'Indeksert før',
     syntax: 'before:YYYY-MM-DD',
-    description: 'Filtrerer på Googles indekseringsdato. Upålitelig - bruk heller Verktøy-menyen',
+    description: 'Filtrerer på Googles indekseringsdato. Kan være upålitelig. Bruk evt. Verktøy-menyen',
     inputExample: '2024-01-01',
     category: 'date',
     platforms: ['google'],
@@ -144,7 +144,7 @@ export const GOOGLE_OPERATORS: Operator[] = [
     id: 'after',
     name: 'Indeksert etter',
     syntax: 'after:YYYY-MM-DD',
-    description: 'Filtrerer på Googles indekseringsdato. Upålitelig - bruk heller Verktøy-menyen',
+    description: 'Filtrerer på Googles indekseringsdato. Kan være upålitelig. Bruk evt. Verktøy-menyen',
     inputExample: '2024-01-01',
     category: 'date',
     platforms: ['google'],
@@ -153,9 +153,9 @@ export const GOOGLE_OPERATORS: Operator[] = [
   // Avansert
   {
     id: 'around',
-    name: 'Ord nær hverandre',
-    syntax: 'AROUND(n)',
-    description: 'Finner tekst der ordene står maks n ord fra hverandre. Bruk sitattegn rundt ordene',
+    name: 'Ordavstand',
+    syntax: 'AROUND(x)',
+    description: 'Finner tekst der ordene står maks x ord fra hverandre. Bruk sitattegn rundt ordene',
     inputExample: '"klima" AROUND(3) "krise"',
     category: 'advanced',
     platforms: ['google'],

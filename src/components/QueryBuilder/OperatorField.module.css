@@ -4,6 +4,8 @@
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
+  /* Prevent double-tap zoom */
+  touch-action: manipulation;
 }
 
 .input {
@@ -12,8 +14,8 @@
   padding: 9px 11px;
   font-size: var(--text-sm);
   color: var(--color-text-primary);
-  background: var(--color-bg-secondary);
-  border: 1px solid transparent;
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border-subtle, rgba(246, 244, 240, 0.12));
   border-radius: var(--radius-md);
   transition: all var(--transition-base);
   /* Allow text selection in input field */
@@ -27,8 +29,8 @@
 }
 
 .input:hover:not(:focus) {
-  background: var(--color-bg-tertiary);
-  border-color: rgba(246, 244, 240, 0.1);
+  background: var(--color-bg-secondary);
+  border-color: rgba(246, 244, 240, 0.2);
 }
 
 .input:focus {
@@ -52,7 +54,7 @@
   box-shadow: 0 0 0 2px var(--color-accent-glow);
 }
 
-/* Label - refined positioning */
+/* Label - single line, truncate if needed */
 .label {
   position: absolute;
   top: -8px;
@@ -68,7 +70,7 @@
   user-select: none;
   z-index: 2;
   white-space: nowrap;
-  max-width: calc(100% - 30px);
+  max-width: calc(100% - 20px);
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -243,13 +245,14 @@
     left: var(--space-md);
     right: var(--space-md);
     top: auto;
-    bottom: var(--space-lg);
+    /* Account for safe area in bottom positioning */
+    bottom: max(var(--space-lg), env(safe-area-inset-bottom));
     max-width: none;
-    transform: translateY(calc(100% + var(--space-lg)));
+    transform: translateY(calc(100% + max(var(--space-lg), env(safe-area-inset-bottom))));
     border-radius: var(--radius-xl);
-    padding: 16px 20px;
-    /* iOS safe area support */
-    padding-bottom: max(20px, env(safe-area-inset-bottom));
+    padding: 16px 20px 20px;
+    /* No gesture conflicts on tooltip */
+    touch-action: none;
   }
 
   .field.showTooltip .tooltip {

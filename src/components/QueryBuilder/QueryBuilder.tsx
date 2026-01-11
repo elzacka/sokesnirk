@@ -110,38 +110,24 @@ export function QueryBuilder({ platform }: QueryBuilderProps) {
     setFreeText('')
   }
 
+  const hasAnyInput = queryString.length > 0
+
   return (
     <div className={styles.builder}>
-      {/* Query output bar */}
-      <div className={styles.queryBar}>
-        <div className={styles.queryOutput}>
-          {queryString ? (
-            <QueryPreview query={queryString} />
-          ) : (
-            <span className={styles.queryPlaceholder}>Søkestrengen vises her. Kopier og lim inn der du skal søke.</span>
+      {/* Main workspace card */}
+      <div className={styles.workspace}>
+        {/* Section label */}
+        <div className={styles.sectionLabel}>
+          <span className={styles.labelText}>Filtrer søket</span>
+          {!hasAnyInput && (
+            <span className={styles.labelHint}>
+              {isTouchDevice ? 'hold inne felt for hjelp' : 'hold over felt for hjelp'}
+            </span>
           )}
         </div>
-        <div className={styles.queryActions}>
-          {queryString && (
-            <button
-              className={styles.clearButton}
-              onClick={clearAll}
-              aria-label="Tøm alle felt"
-            >
-              Tøm
-            </button>
-          )}
-          <CopyButton text={queryString} size="sm" disabled={!queryString} />
-        </div>
-      </div>
 
-      {/* Section intro with hint - different for touch vs hover */}
-      <p className={styles.sectionHint}>
-        {isTouchDevice ? 'Generer søkestreng ved å fylle ut felt du vil filtrere på. Trykk og hold i felt for veiledning.' : 'Generer søkestreng ved å fylle ut felt du vil filtrere på. Hold musepeker over felt for veiledning.'}
-      </p>
-
-      {/* All operators in a unified flow */}
-      <div className={styles.operatorGrid}>
+        {/* Operator grid */}
+        <div className={styles.operatorGrid}>
         {/* Free text field first */}
         <OperatorField
           operator={FREE_TEXT_OPERATOR}
@@ -161,6 +147,30 @@ export function QueryBuilder({ platform }: QueryBuilderProps) {
             />
           ))
         })}
+        </div>
+      </div>
+
+      {/* Query output bar */}
+      <div className={`${styles.queryBar} ${hasAnyInput ? styles.hasQuery : ''}`}>
+        <div className={styles.queryOutput}>
+          {queryString ? (
+            <QueryPreview query={queryString} />
+          ) : (
+            <span className={styles.queryPlaceholder}>Søkestrengen vises her</span>
+          )}
+        </div>
+        <div className={styles.queryActions}>
+          {queryString && (
+            <button
+              className={styles.clearButton}
+              onClick={clearAll}
+              aria-label="Tøm alle felt"
+            >
+              Tøm
+            </button>
+          )}
+          <CopyButton text={queryString} size="sm" disabled={!queryString} />
+        </div>
       </div>
     </div>
   )

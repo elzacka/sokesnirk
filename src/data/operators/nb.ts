@@ -3,7 +3,7 @@ import type { Operator } from '@/types'
 export const NB_OPERATORS: Operator[] = [
   {
     id: 'nb-proximity',
-    name: 'Ord nær hverandre',
+    name: 'Ordavstand',
     syntax: '"ord ord"~N',
     description: 'Finner tekst der ordene står nær hverandre. Tallet angir maks avstand',
     inputExample: '"Ibsen Bjørnson"~5',
@@ -33,7 +33,7 @@ export const NB_OPERATORS: Operator[] = [
     name: 'Kun i teksten',
     syntax: 'freetext:tekst',
     description: 'Søker kun i selve teksten, ikke i metadata',
-    inputExample: 'på folkemunne',
+    inputExample: 'tante Ulrikke',
     category: 'filter',
     platforms: ['nb'],
   },

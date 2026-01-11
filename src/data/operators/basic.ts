@@ -39,7 +39,7 @@ export const BASIC_OPERATORS: Operator[] = [
   },
   {
     id: 'wildcard',
-    name: 'Erstatt ukjent ord',
+    name: 'Jokertegn',
     syntax: '*',
     description:
       'Erstatter ukjente ord. «beste * i Oslo» finner restaurant, kafé, hotell osv.',
@@ -49,7 +49,7 @@ export const BASIC_OPERATORS: Operator[] = [
   },
   {
     id: 'group',
-    name: 'Grupper logisk',
+    name: 'Gruppering',
     syntax: '(A OR B) C',
     description:
       'Kombinerer søkeord logisk. Parenteser grupperer OR/AND-uttrykk',

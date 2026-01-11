@@ -21,7 +21,7 @@ export const GITHUB_OPERATORS: Operator[] = [
   },
   {
     id: 'github-org',
-    name: 'Fra en organisasjon',
+    name: 'Organisasjon',
     syntax: 'org:orgnavn',
     description: 'Søker i alle prosjekter fra denne organisasjonen',
     inputExample: 'microsoft',
@@ -30,7 +30,7 @@ export const GITHUB_OPERATORS: Operator[] = [
   },
   {
     id: 'github-language',
-    name: 'Programmeringsspråk',
+    name: 'Språk',
     syntax: 'language:språk',
     description: 'Finner kun kode i dette programmeringsspråket',
     inputExample: 'python',
@@ -96,7 +96,7 @@ export const GITHUB_OPERATORS: Operator[] = [
     name: 'Sist oppdatert',
     syntax: 'pushed:>YYYY-MM-DD',
     description: 'Finner prosjekter med nylige commits',
-    inputExample: '>2026-01-01',
+    inputExample: '>2025-01-01',
     category: 'date',
     platforms: ['github'],
   },
