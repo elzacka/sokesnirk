@@ -1,5 +1,9 @@
 .field {
   position: relative;
+  /* Prevent iOS text selection/callout on long press */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .input {
@@ -12,6 +16,9 @@
   border: 1px solid transparent;
   border-radius: var(--radius-md);
   transition: all var(--transition-base);
+  /* Allow text selection in input field */
+  -webkit-user-select: text;
+  user-select: text;
 }
 
 .input::placeholder {

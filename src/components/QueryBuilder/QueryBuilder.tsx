@@ -118,7 +118,7 @@ export function QueryBuilder({ platform }: QueryBuilderProps) {
           {queryString ? (
             <QueryPreview query={queryString} />
           ) : (
-            <span className={styles.queryPlaceholder}>Søkestrengen vises her</span>
+            <span className={styles.queryPlaceholder}>Søkestrengen vises her. Kopier og lim inn der du skal søke.</span>
           )}
         </div>
         <div className={styles.queryActions}>
@@ -137,7 +137,7 @@ export function QueryBuilder({ platform }: QueryBuilderProps) {
 
       {/* Section intro with hint - different for touch vs hover */}
       <p className={styles.sectionHint}>
-        {isTouchDevice ? 'Fyll ut feltene du trenger. Hold inne et felt for veiledning.' : 'Fyll ut feltene du trenger. Hold over feltene for veiledning.'}
+        {isTouchDevice ? 'Generer søkestreng ved å fylle ut felt du vil filtrere på. Trykk og hold i felt for veiledning.' : 'Generer søkestreng ved å fylle ut felt du vil filtrere på. Hold musepeker over felt for veiledning.'}
       </p>
 
       {/* All operators in a unified flow */}

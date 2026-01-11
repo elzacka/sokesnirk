@@ -1,9 +1,19 @@
 const CACHE_NAME = 'sokesnirk-v1'
 const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/icon.svg',
+  './',
+  './index.html',
+  './manifest.json',
+  './icon.svg',
+  './apple-touch-icon.png',
+  './icons/icon-192.png',
+  './icons/icon-512.png',
+  './icons/icon-192-maskable.png',
+  './icons/icon-512-maskable.png',
+  './icons/apple-touch-icon.png',
+  './icons/apple-touch-icon-152.png',
+  './icons/apple-touch-icon-167.png',
+  './icons/favicon-16.png',
+  './icons/favicon-32.png',
 ]
 
 // Install event - cache static assets
@@ -22,7 +32,7 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames
-          .filter((name) => name !== CACHE_NAME)
+          .filter((name) => name.startsWith('sokesnirk-') && name !== CACHE_NAME)
           .map((name) => caches.delete(name))
       )
     })
@@ -30,7 +40,7 @@ self.addEventListener('activate', (event) => {
   self.clients.claim()
 })
 
-// Fetch event - cache-first strategy for assets, network-first for navigation
+// Fetch event - stale-while-revalidate for assets, network-first for navigation
 self.addEventListener('fetch', (event) => {
   const { request } = event
   const url = new URL(request.url)
@@ -40,6 +50,9 @@ self.addEventListener('fetch', (event) => {
 
   // Skip external requests
   if (url.origin !== location.origin) return
+
+  // Skip chrome-extension and other protocols
+  if (!url.protocol.startsWith('http')) return
 
   // Navigation requests - network first, fallback to cache
   if (request.mode === 'navigate') {
@@ -55,38 +68,29 @@ self.addEventListener('fetch', (event) => {
         })
         .catch(() => {
           return caches.match(request).then((cached) => {
-            return cached || caches.match('/')
+            return cached || caches.match('./')
           })
         })
     )
     return
   }
 
-  // Static assets - cache first, fallback to network
+  // Static assets - stale-while-revalidate
   event.respondWith(
     caches.match(request).then((cached) => {
-      if (cached) {
-        // Return cached version and update cache in background
-        fetch(request).then((response) => {
+      const fetchPromise = fetch(request)
+        .then((response) => {
           if (response.ok) {
+            const responseClone = response.clone()
             caches.open(CACHE_NAME).then((cache) => {
-              cache.put(request, response)
+              cache.put(request, responseClone)
             })
           }
-        }).catch(() => {})
-        return cached
-      }
+          return response
+        })
+        .catch(() => cached)
 
-      // Not in cache - fetch and cache
-      return fetch(request).then((response) => {
-        if (response.ok) {
-          const responseClone = response.clone()
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(request, responseClone)
-          })
-        }
-        return response
-      })
+      return cached || fetchPromise
     })
   )
 })

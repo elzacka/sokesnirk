@@ -172,12 +172,14 @@
 
   .dropdown {
     position: fixed;
-    top: auto;
+    top: var(--space-md);
+    top: max(var(--space-md), env(safe-area-inset-top));
     right: var(--space-md);
     left: var(--space-md);
-    bottom: var(--space-md);
+    bottom: auto;
     min-width: 0;
-    max-height: 60vh;
+    max-height: calc(100vh - 120px);
+    max-height: calc(100dvh - 120px);
   }
 
   .platformOption {
