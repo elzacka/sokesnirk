@@ -77,7 +77,24 @@ export function QueryBuilder({ platform }: QueryBuilderProps) {
         const value = sanitizeQueryInput(rawValue)
         if (!value) continue
 
-        if (op.syntax.includes(':')) {
+        if (op.syntax.startsWith('|')) {
+          // KQL pipe operators (Azure Monitor)
+          // User provides the full expression after the pipe command
+          const pipeCmd = op.syntax.split(' ')[0] // e.g., "| where", "| project"
+          parts.push(`${pipeCmd} ${value}`)
+        } else if (op.syntax.includes('[') && op.syntax.includes(']')) {
+          // PubMed field tags like [tiab], [ti], [au], [mh]
+          const tag = op.syntax.match(/\[.*\]/)?.[0] || ''
+          parts.push(`${value}${tag}`)
+        } else if (op.syntax.includes(':>')) {
+          // GitHub comparison operators (stars:>n, pushed:>date)
+          const prefix = op.syntax.split(':')[0]
+          parts.push(`${prefix}:${value}`)
+        } else if (op.syntax.includes('~') && !op.syntax.includes(' ~ ')) {
+          // Lucene proximity/fuzzy (NB): "ord ord"~N or ord~N
+          // User provides the complete expression
+          parts.push(value)
+        } else if (op.syntax.includes(':')) {
           // Operator with value (site:, filetype:, etc.)
           const prefix = op.syntax.split(':')[0]
           const val = value.includes(' ') ? `"${value}"` : value
@@ -101,6 +118,33 @@ export function QueryBuilder({ platform }: QueryBuilderProps) {
           parts.push(value)
         } else if (op.syntax.includes('AROUND')) {
           parts.push(value)
+        } else if (op.syntax.includes(' ~ ')) {
+          // CQL/JQL text search operators (text ~ "tekst", title ~ "tekst")
+          const field = op.syntax.split(' ~ ')[0]
+          parts.push(`${field} ~ "${value}"`)
+        } else if (op.syntax.includes(' = ')) {
+          // CQL/JQL equality operators (project = "X", status = "Y")
+          const field = op.syntax.split(' = ')[0]
+          // Don't add quotes for special functions like currentUser()
+          const val = value.includes('(') ? value : `"${value}"`
+          parts.push(`${field} = ${val}`)
+        } else if (op.syntax.includes(' >= ')) {
+          // CQL/JQL date comparison (created >= "2024-01-01")
+          const field = op.syntax.split(' >= ')[0]
+          // Don't add quotes for relative dates like -7d
+          const val = value.startsWith('-') ? value : `"${value}"`
+          parts.push(`${field} >= ${val}`)
+        } else if (op.syntax.includes(' WAS ')) {
+          // JQL WAS operator (status WAS "status")
+          const field = op.syntax.split(' WAS ')[0]
+          parts.push(`${field} WAS "${value}"`)
+        } else if (op.syntax.includes(' CHANGED ')) {
+          // JQL CHANGED operator (status CHANGED AFTER -1w)
+          const field = op.syntax.split(' CHANGED ')[0]
+          parts.push(`${field} CHANGED AFTER ${value}`)
+        } else if (op.syntax.includes('ORDER BY')) {
+          // JQL ORDER BY
+          parts.push(`ORDER BY ${value}`)
         } else {
           parts.push(value)
         }
@@ -113,9 +157,19 @@ export function QueryBuilder({ platform }: QueryBuilderProps) {
       parts.push(sanitizedFreeText)
     }
 
+    // Join parts with appropriate separator based on platform
+    // CQL (Confluence) and JQL (Jira) use AND between clauses
+    // KQL (Azure) uses newline or space between pipe commands
+    let separator = ' '
+    if (platform === 'confluence' || platform === 'jira') {
+      separator = ' AND '
+    } else if (platform === 'azure') {
+      separator = ' '
+    }
+
     // Final sanitization of the complete query
-    return sanitizeSearchQuery(parts.join(' '))
-  }, [allOperators, operatorValues, freeText])
+    return sanitizeSearchQuery(parts.join(separator))
+  }, [allOperators, operatorValues, freeText, platform])
 
   const updateOperatorValue = (operatorId: string, value: string) => {
     setOperatorValues((prev) => ({ ...prev, [operatorId]: value }))
