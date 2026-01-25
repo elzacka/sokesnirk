@@ -39,6 +39,7 @@ export interface Operator {
   inputExample: string
   category: OperatorCategory
   platforms: Platform[]
+  deprecated?: boolean
 }
 
 export interface PlatformConfig {
