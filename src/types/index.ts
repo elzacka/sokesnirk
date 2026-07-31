@@ -1,26 +1,8 @@
-export type Platform =
-  | 'google'
-  | 'shodan'
-  | 'github'
-  | 'scholar'
-  | 'pubmed'
-  | 'nb'
-  | 'archive'
-  | 'confluence'
-  | 'jira'
-  | 'azure'
+export type Platform = 'google' | 'nb'
 
-export type PlatformCategory = 'search' | 'code' | 'academic' | 'archive' | 'security' | 'productivity'
+export type PlatformCategory = 'search' | 'archive'
 
-export type QueryLanguage =
-  | 'google-style'
-  | 'boolean'
-  | 'lucene'
-  | 'shodan'
-  | 'cql'
-  | 'jql'
-  | 'kql'
-  | 'url-based'
+export type QueryLanguage = 'google-style' | 'lucene'
 
 export type OperatorCategory =
   | 'basic'
@@ -84,7 +66,7 @@ export interface UserPreferences {
 }
 
 export const DEFAULT_PREFERENCES: UserPreferences = {
-  enabledPlatforms: ['google', 'github', 'nb'],
+  enabledPlatforms: ['google', 'nb'],
   theme: 'light',
   defaultPlatform: 'google',
 }

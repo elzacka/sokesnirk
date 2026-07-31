@@ -38,14 +38,8 @@ src/
 ## Plattformer og Query Languages
 
 Organisert etter query language:
-- Boolean: PubMed
-- CQL: Confluence
-- Google Dorks: Google, Google Scholar
-- JQL: Jira
-- KQL: Azure Monitor
-- Lucene: Nasjonalbiblioteket, GitHub
-- Shodan: Shodan
-- URL-basert: Wayback Machine
+- Google Dorks: Google
+- Lucene: Nasjonalbiblioteket
 
 ## Konvensjoner
 

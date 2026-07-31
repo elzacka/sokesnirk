@@ -2,9 +2,9 @@
 
 **[Åpne Søkesnirk](https://elzacka.github.io/sokesnirk/)**
 
-PWA for å bygge avanserte søkestrenger med operatorer for ulike søkeplattformer.
+PWA for å bygge avanserte søkestrenger med operatorer for Google og Nasjonalbiblioteket.
 
-Ulike plattformer bruker ulik søkesyntaks. Søkesnirk hjelper deg å:
+De to tjenestene bruker ulik søkesyntaks. Søkesnirk hjelper deg å:
 
 - Velge riktig syntaks basert på hvor du søker
 - Finne informasjon effektivt og presist
@@ -13,7 +13,7 @@ Ulike plattformer bruker ulik søkesyntaks. Søkesnirk hjelper deg å:
 ## Funksjoner
 
 - Bygg søkestrenger med plattformspesifikke operatorer
-- Støtte for flere plattformer og query languages
+- Støtte for Google Dorks og Lucene-syntaks
 - Kopier ferdig søkestreng til utklippstavlen
 - Tooltips med forklaring og eksempler på hver operator
 - Responsivt design med optimalisert mobilopplevelse
@@ -37,16 +37,10 @@ npm run dev
 
 ## Plattformer og Query Languages
 
-| Query Language | Plattformer                          |
-| -------------- | ------------------------------------ |
-| Boolean        | PubMed                               |
-| CQL            | Confluence                           |
-| Google Dorks   | Google, Google Scholar               |
-| JQL            | Jira                                 |
-| KQL            | Azure Monitor                        |
-| Lucene         | Nasjonalbiblioteket, GitHub          |
-| Shodan         | Shodan                               |
-| URL-basert     | Wayback Machine                      |
+| Query Language | Plattformer         |
+| -------------- | ------------------- |
+| Google Dorks   | Google              |
+| Lucene         | Nasjonalbiblioteket |
 
 ## Teknologi
 

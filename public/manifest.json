@@ -1,7 +1,7 @@
 {
   "name": "Søkesnirk",
   "short_name": "Søkesnirk",
-  "description": "Bygg perfekte søkestrenger for Google, Shodan, GitHub og mer",
+  "description": "Bygg presise søkestrenger for Google og Nasjonalbiblioteket",
   "start_url": "./",
   "scope": "./",
   "id": "sokesnirk",
