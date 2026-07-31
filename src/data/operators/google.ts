@@ -6,8 +6,18 @@ export const GOOGLE_OPERATORS: Operator[] = [
     id: 'site',
     name: 'Nettsted',
     syntax: 'site:domene.no',
-    description: 'Søker kun på ett nettsted. Inkluderer underdomener.',
+    description:
+      'Søker kun på ett nettsted. Inkluderer underdomener. Du kan også begrense til en mappe, for eksempel claude.ai/share. Får du null treff, er sidene som regel ikke i Googles indeks.',
     inputExample: 'vg.no',
+    category: 'site',
+    platforms: ['google'],
+  },
+  {
+    id: 'exclude-site',
+    name: 'Utelat nettsted',
+    syntax: '-site:domene.no',
+    description: 'Fjerner alle treff fra dette nettstedet. Nyttig når én kilde tar over resultatlista.',
+    inputExample: 'pinterest.com',
     category: 'site',
     platforms: ['google'],
   },
@@ -16,7 +26,7 @@ export const GOOGLE_OPERATORS: Operator[] = [
     name: 'Lignende nettsteder',
     syntax: 'related:domene.no',
     description:
-      '⚠️ UTDATERT: Google fjernet denne operatoren i 2017. Se i stedet "Andre nettsteder som ligner" på domenet.',
+      'Virker ikke. Google fjernet operatoren i 2023. Bruk heller «Flere resultater fra dette nettstedet» i trefflista.',
     inputExample: 'vg.no',
     category: 'site',
     platforms: ['google'],
@@ -26,10 +36,12 @@ export const GOOGLE_OPERATORS: Operator[] = [
     id: 'cache',
     name: 'Cache',
     syntax: 'cache:url',
-    description: 'Viser Googles lagrede kopi av siden. NB: Fungerer sjelden i 2026.',
+    description:
+      'Virker ikke. Google slo av lagrede kopier i 2024. Bruk Wayback Machine på web.archive.org for å se eldre versjoner.',
     inputExample: 'example.com',
     category: 'site',
     platforms: ['google'],
+    deprecated: true,
   },
 
   // Søk i URL
@@ -97,7 +109,7 @@ export const GOOGLE_OPERATORS: Operator[] = [
     id: 'inanchor',
     name: 'Ord i lenke',
     syntax: 'inanchor:tekst',
-    description: 'Finner sider som lenkes til med denne teksten.',
+    description: 'Finner sider som lenkes til med denne teksten. Google gir ufullstendige treff her.',
     inputExample: 'klikk her',
     category: 'site',
     platforms: ['google'],
@@ -106,7 +118,8 @@ export const GOOGLE_OPERATORS: Operator[] = [
     id: 'allinanchor',
     name: 'Alle i lenke',
     syntax: 'allinanchor:ord1 ord2',
-    description: 'Finner sider som lenkes til med alle disse ordene. Ikke kombiner med andre operatorer.',
+    description:
+      'Finner sider som lenkes til med alle disse ordene. Ikke kombiner med andre operatorer. Gir ufullstendige treff.',
     inputExample: 'gratis nedlasting',
     category: 'site',
     platforms: ['google'],
@@ -117,7 +130,8 @@ export const GOOGLE_OPERATORS: Operator[] = [
     id: 'filetype',
     name: 'Filtype',
     syntax: 'filetype:pdf',
-    description: 'Søker kun etter filer av en bestemt type (PDF, Word, Excel, PowerPoint, osv).',
+    description:
+      'Søker kun etter filer av en bestemt type (pdf, doc, docx, xls, xlsx, ppt, csv, txt). ext: gjør det samme.',
     inputExample: 'pdf',
     category: 'file',
     platforms: ['google'],
@@ -135,28 +149,21 @@ export const GOOGLE_OPERATORS: Operator[] = [
   // Dato
   {
     id: 'before',
-    name: 'Indeksert før',
+    name: 'Publisert før',
     syntax: 'before:YYYY-MM-DD',
-    description: 'Søker på sider Google indekserte før en bestemt dato. Kan være upålitelig.',
+    description:
+      'Søker på sider Google har datert før denne datoen. Datoen er Googles beste gjetning og kan bomme.',
     inputExample: '2024-01-01',
     category: 'date',
     platforms: ['google'],
   },
   {
     id: 'after',
-    name: 'Indeksert etter',
+    name: 'Publisert etter',
     syntax: 'after:YYYY-MM-DD',
-    description: 'Søker på sider Google indekserte etter en bestemt dato. Bruk Google Tools-filter for bedre resultat.',
+    description:
+      'Søker på sider Google har datert etter denne datoen. Bruk filteret under «Verktøy» hvis du trenger presis periode.',
     inputExample: '2024-01-01',
-    category: 'date',
-    platforms: ['google'],
-  },
-  {
-    id: 'daterange',
-    name: 'Datointervall',
-    syntax: 'daterange:CCYYMMDD-CCYYMMDD',
-    description: 'Søker etter sider indeksert mellom to datoer. Eksempel: 20240101-20261231.',
-    inputExample: '20240101-20261231',
     category: 'date',
     platforms: ['google'],
   },
@@ -165,9 +172,10 @@ export const GOOGLE_OPERATORS: Operator[] = [
   {
     id: 'numrange',
     name: 'Tallintervall',
-    syntax: 'numrange:start..slutt',
-    description: 'Finner sider med tall innenfor intervallet. Nyttig for priser, år, eller versjonsnumre.',
-    inputExample: '100..500',
+    syntax: 'tall..tall',
+    description:
+      'Finner sider med tall innenfor intervallet. Skriv to punktum mellom tallene. Virker best på priser og årstall.',
+    inputExample: '2020..2026',
     category: 'advanced',
     platforms: ['google'],
   },
@@ -175,7 +183,8 @@ export const GOOGLE_OPERATORS: Operator[] = [
     id: 'around',
     name: 'Ordavstand',
     syntax: 'AROUND(x)',
-    description: 'Finner sider hvor to ord eller fraser står tett sammen (innen x ord).',
+    description:
+      'Finner sider hvor to ord eller fraser står tett sammen (innen x ord). Må skrives med store bokstaver. Google overser den av og til.',
     inputExample: '"klima" AROUND(3) "krise"',
     category: 'advanced',
     platforms: ['google'],

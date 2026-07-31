@@ -8,7 +8,7 @@ export const BASIC_OPERATORS: Operator[] = [
     description: 'Finner kun treff der ordene står i nøyaktig denne rekkefølgen.',
     inputExample: 'access denied',
     category: 'basic',
-    platforms: ['google', 'github', 'scholar', 'pubmed', 'nb', 'archive'],
+    platforms: ['google', 'nb'],
   },
   {
     id: 'or',
@@ -17,7 +17,7 @@ export const BASIC_OPERATORS: Operator[] = [
     description: 'Søker etter én eller flere alternativer. Finner resultater med minst ett av ordene.',
     inputExample: 'manual, bruksanvisning, user guide',
     category: 'basic',
-    platforms: ['google', 'github', 'scholar', 'pubmed', 'nb'],
+    platforms: ['google', 'nb'],
   },
   {
     id: 'and',
@@ -26,7 +26,7 @@ export const BASIC_OPERATORS: Operator[] = [
     description: 'Søker etter alle ordene sammen. Alle må være til stede i resultatet.',
     inputExample: 'config, password, admin',
     category: 'basic',
-    platforms: ['google', 'github', 'scholar', 'pubmed', 'nb'],
+    platforms: ['google', 'nb'],
   },
   {
     id: 'exclude',
@@ -35,7 +35,7 @@ export const BASIC_OPERATORS: Operator[] = [
     description: 'Fjerner alle treff som inneholder dette ordet.',
     inputExample: 'deprecated',
     category: 'basic',
-    platforms: ['google', 'github', 'scholar', 'shodan', 'nb'],
+    platforms: ['google', 'nb'],
   },
   {
     id: 'wildcard',
@@ -45,7 +45,7 @@ export const BASIC_OPERATORS: Operator[] = [
       'Erstatter ett ord. «beste * i Oslo» finner både «beste restaurant», «beste kafé», «beste hotell» osv.',
     inputExample: 'beste * i Oslo',
     category: 'basic',
-    platforms: ['google', 'nb'],
+    platforms: ['google'],
   },
   {
     id: 'group',
@@ -55,6 +55,6 @@ export const BASIC_OPERATORS: Operator[] = [
       'Organiserer søket. «(error OR warning) log» betyr: "logg-filer som inneholder enten «error» eller «warning»".',
     inputExample: '(error OR warning) log',
     category: 'basic',
-    platforms: ['google', 'github', 'shodan', 'nb'],
+    platforms: ['google', 'nb'],
   },
 ]
