@@ -2,50 +2,9 @@
 
 PWA for å bygge søkestrenger med avanserte operatorer for ulike plattformer.
 
-## Teknisk stack
-
-- React 19 med TypeScript
-- Vite 7
-- CSS Modules
-- PWA med Service Worker
-
-## Kommandoer
-
-```bash
-npm run dev      # Start utviklingsserver
-npm run build    # Produksjonsbuild
-npm run lint     # Kjør ESLint
-npm run preview  # Forhåndsvis build
-```
-
-## Prosjektstruktur
-
-```
-src/
-├── components/
-│   ├── Layout/          # Header, meny, layout
-│   ├── QueryBuilder/    # Hovedfunksjonalitet
-│   └── ui/              # Gjenbrukbare komponenter
-├── data/
-│   ├── operators/       # Operatorer per plattform (én fil per plattform)
-│   └── platforms.ts     # Plattformkonfigurasjon
-├── hooks/               # Custom hooks (useClipboard, useIsTouchDevice, usePreferences)
-├── pages/               # Sidekomponenter
-├── styles/              # Global CSS
-└── types/               # TypeScript-typer
-```
-
-## Plattformer og Query Languages
-
-Organisert etter query language:
-- Google Dorks: Google
-- Lucene: Nasjonalbiblioteket
-
 ## Konvensjoner
 
-- Norsk UI-tekst
-- Ingen eksterne ikonbibliotek (egne SVG-ikoner i Icons.tsx)
+- Egne SVG-ikoner (`Icons.tsx`), ingen eksternt ikonbibliotek
 - Floating label-mønster i skjemafelt
-- Tooltip med hover-delay på desktop, long-press på mobil
-- WCAG 2.2 AA: 44px touch targets, 4.5:1 kontrast
-- iOS safe area support for notch/home indicator
+- Tooltip: hover-delay på desktop, long-press på mobil
+- iOS safe area-støtte for notch/home-indikator
