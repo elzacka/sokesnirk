@@ -1,5 +1,12 @@
 /* Søkesnirk - Dark theme design system */
-/* Font loaded via index.html for better performance */
+
+@font-face {
+  font-family: 'Berkshire Swash';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/fonts/BerkshireSwash-Regular.ttf') format('truetype');
+}
 
 :root {
   /* Dark theme colors */
