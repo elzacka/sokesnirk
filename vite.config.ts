@@ -25,7 +25,7 @@ function swCacheVersionPlugin(): Plugin {
 }
 
 function cspPlugin(): Plugin {
-  const cspContent = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"
+  const cspContent = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://elzacka.goatcounter.com; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"
 
   return {
     name: 'csp-plugin',
