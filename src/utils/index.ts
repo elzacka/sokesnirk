@@ -1,8 +1,1 @@
-export {
-  escapeHtml,
-  sanitizeQueryInput,
-  sanitizeSearchQuery,
-  isValidSearchUrl,
-  encodeSearchQuery,
-  createSafeSearchUrl,
-} from './sanitize'
+export { sanitizeQueryInput, sanitizeSearchQuery } from './sanitize'
