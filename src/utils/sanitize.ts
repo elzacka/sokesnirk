@@ -1,14 +1,5 @@
-/**
- * XSS Protection utilities for Søkesnirk
- *
- * These functions sanitize user input to prevent code injection attacks
- * when building search query strings.
- */
+// Sanitizes user input before it goes into search query strings.
 
-/**
- * Sanitizes input for use in search query strings
- * Removes or escapes characters that could be used for injection
- */
 export function sanitizeQueryInput(input: string): string {
   if (typeof input !== 'string') return ''
 
@@ -28,10 +19,7 @@ export function sanitizeQueryInput(input: string): string {
   return sanitized
 }
 
-/**
- * Sanitizes a complete search query string before URL encoding
- * This is the final sanitization before the query is used
- */
+// Final pass on the complete query before URL encoding.
 export function sanitizeSearchQuery(query: string): string {
   if (typeof query !== 'string') return ''
 
