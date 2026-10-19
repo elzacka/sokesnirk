@@ -25,7 +25,7 @@ function swCacheVersionPlugin(): Plugin {
 }
 
 function cspPlugin(): Plugin {
-  const cspContent = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';"
+  const cspContent = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"
 
   return {
     name: 'csp-plugin',
@@ -36,7 +36,7 @@ function cspPlugin(): Plugin {
         if (ctx.bundle) {
           return html.replace(
             '<meta charset="UTF-8" />',
-            `<meta charset="UTF-8" />\n    <meta http-equiv="Content-Security-Policy" content="${cspContent}" />\n    <meta http-equiv="X-Content-Type-Options" content="nosniff" />\n    <meta name="referrer" content="strict-origin-when-cross-origin" />`
+            `<meta charset="UTF-8" />\n    <meta http-equiv="Content-Security-Policy" content="${cspContent}" />\n    <meta name="referrer" content="strict-origin-when-cross-origin" />`
           )
         }
         return html
