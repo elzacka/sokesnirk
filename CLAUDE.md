@@ -6,7 +6,6 @@ PWA for å bygge søkestrenger med avanserte operatorer for ulike plattformer.
 
 - Egne SVG-ikoner (`Icons.tsx`), ingen eksternt ikonbibliotek
 - Merkeskriften Berkshire Swash er selvhostet (`src/assets/fonts/`, OFL), ingen Google Fonts
-- Besøkstelling: `countVisit()` (`src/utils/visitCount.ts`) sender bare `/sokesnirk/` ved oppstart, aldri søkeord eller plattformvalg
 - Floating label-mønster i skjemafelt
 - Tooltip: hover-delay på desktop, long-press på mobil
 - iOS safe area-støtte for notch/home-indikator
